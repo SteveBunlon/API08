@@ -11,10 +11,16 @@ angular.module('polarApplication', ["ui.router", "polarApplication.home"])
     });
 })
 
-.run(function ($state) {
+.run(function ($state) {	
     $state.go("app.home");
  }) 
 
 .controller("appCtrl",["$scope","$state", function ($scope, $state){    
-    
+    $(".button-collapse").sideNav();
+    $scope.state = $state;
+    console.log($state.current);
+
+    $scope.goProducts = function(){
+        $state.go("app.products");
+    }
 }])

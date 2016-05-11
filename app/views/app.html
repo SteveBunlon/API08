@@ -1,13 +1,26 @@
 <header>
   <nav>
-    <div class="nav-wrapper  red darken-4">
-      <a href="#" class="brand-logo">
-        <img src="app/pictures/favicon.png" height="62"></img>        
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">        
+        <img src="app/pictures/favicon.png" height="62"></img>      
+        <span>Le Polar </span>       
       </a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">JavaScript</a></li>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li class="{{(state.current.name == 'app.home')?'active':''}}"><a href="#">Accueil</a></li>   
+        <li class="{{(state.current.name == 'app.products')?'active':''}}"><a href="#">Produits</a></li>
+        <li class="{{(state.current.name == 'app.services')?'active':''}}"><a href="#">Services</a></li>
+        <li class="{{(state.current.name == 'app.contact')?'active':''}}"><a href="#">Contact</a></li>
+        <li class="{{(state.current.name == 'app.about')?'active':''}}"><a href="#">À propos</a></li>
+        <li class="{{(state.current.name == 'app.connexion')?'active':''}}"><a href="#">Connexion</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+       <li class="{{(state.current.name == 'app.home')?'active':''}}"><a href="#">Accueil</a></li>   
+        <li class="{{(state.current.name == 'app.products')?'active':''}}"><a href="#">Produits</a></li>
+        <li class="{{(state.current.name == 'app.services')?'active':''}}"><a href="#">Services</a></li>
+        <li class="{{(state.current.name == 'app.contact')?'active':''}}"><a href="#">Contact</a></li>
+        <li class="{{(state.current.name == 'app.about')?'active':''}}"><a href="#">À propos</a></li>
+        <li class="{{(state.current.name == 'app.connexion')?'active':''}}"><a href="#">Connexion</a></li>
       </ul>
     </div>
   </nav>
@@ -16,34 +29,27 @@
   <div ui-view ></div>
 </main>
 <footer class="page-footer teal lighten-1">
+ <div class="container">
+  <div class="row">
+    <div class="col l6 s12">
+      <h5 class="white-text">Footer Content</h5>
+      <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+    </div>
+    <div class="col l4 offset-l2 s12">
+      <h5 class="white-text">Links</h5>
+      <ul>
+        <li><a class="grey-text text-lighten-3" href="#">Link 1</a></li>
+        <li><a class="grey-text text-lighten-3" href="#">Link 2</a></li>
+        <li><a class="grey-text text-lighten-3" href="#">Link 3</a></li>
+        <li><a class="grey-text text-lighten-3" href="#">Link 4</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="footer-copyright">
   <div class="container">
-    <div class="row">
-      <div class="col l4 s12">
-        <a href="#"><h5 class="white-text">FAQ</h5></a>
-        <p class="grey-text text-lighten-4">Consulter la foire aux questions pour des astuces sur l'organisation de votre voyage et les prises en charge. </p>
-      </div>
-      <div class="col l4 s12">
-        <h5 class="white-text">Remerciements</h5>
-        <ul>
-          <li><a class="grey-text text-lighten-3">Paulmier Alix, Porteuse de l'idée et du projet</a></li>
-          <li><a class="grey-text text-lighten-3">Bunlon Steve, Chef de projet et développeur</a></li>
-        </ul>
-      </div>
-      <div class="col l4 s12">
-        <h5 class="white-text">Partenaires</h5>
-        <ul>
-          <li><a class="grey-text text-lighten-3" href="#!">Partenaire 1</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Partenaire 2</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Partenaire 3</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Partenaire 4</a></li>
-        </ul>
-      </div>      
-    </div>
+    © 2016 Le Polar
+    <a href="#" class="right white-text">Nous contacter</a>
   </div>
-  <div class="footer-copyright">
-    <div class="container">
-      © 2016 Erasmus2.0
-      <a href="#" class="right white-text">Nous contacter</a>
-    </div>
-  </div>
+</div>
 </footer>
