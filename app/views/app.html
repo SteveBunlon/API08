@@ -41,6 +41,30 @@
         <li><a ng-click="logout()">Utilisateur CAS</a></li>
         <li><a href="#connexionModal" modal>Externe</a></li>
     </ul>
+    <ul id='servicesDropdown' class='dropdown-content'>
+        <li><a ng-click="goServices()">Poster</a></li>
+        <li><a ng-click="goServices()">Annales</a></li>
+        <li><a ng-click="goServices()">Billeterie</a></li>
+        <li><a ng-click="goServices()">Location</a></li>
+        <li><a ng-click="goServices()">Compte asso</a></li>
+    </ul>
+    <ul id='mobilServicesDropdown' class='dropdown-content'>
+        <li><a ng-click="goServices()">Poster</a></li>
+        <li><a ng-click="goServices()">Annales</a></li>
+        <li><a ng-click="goServices()">Billeterie</a></li>
+        <li><a ng-click="goServices()">Location</a></li>
+        <li><a ng-click="goServices()">Compte asso</a></li>
+    </ul>
+    <ul id='productsDropdown' class='dropdown-content'>
+        <li><a ng-click="goProducts('impressionTab')">Impressions</a></li>
+        <li><a ng-click="goProducts('furnitureTab')">Fournitures</a></li>
+        <li><a ng-click="goProducts('ITProvisionTab')">Informatique</a></li>
+    </ul>
+    <ul id='mobileProductsDropdown' class='dropdown-content'>
+        <li><a ng-click="goProducts()">Impressions</a></li>
+        <li><a ng-click="goProducts()">Fournitures</a></li>
+        <li><a ng-click="goProducts()">Informatique</a></li>
+    </ul>
     <nav>
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">
@@ -49,19 +73,19 @@
             </a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li class="{{(state.current.name == 'app.home')?'active':''}}"><a href="#">Accueil</a></li>
-                <li class="{{(state.current.name == 'app.products')?'active':''}}"><a ng-click="goProducts( )">Produits</a></li>
-                <li class="{{(state.current.name == 'app.services')?'active':''}}"><a href="#">Services</a></li>
+                <li class="{{(state.current.name == 'app.home')?'active':''}}" ng-click="goHome()"><a href="#">Accueil</a></li>
+                <li><a ng-show="true" class="dropdown-button" data-activates='productsDropdown' dropdown>Produits<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a ng-show="true" class="dropdown-button" data-activates='servicesDropdown' dropdown>Services<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li class="{{(state.current.name == 'app.contact')?'active':''}}"><a href="#">Contact</a></li>
-                <li class="{{(state.current.name == 'app.about')?'active':''}}"><a href="#">À propos</a></li>
+                <li class="{{(state.current.name == 'app.about')?'active':''}}" ng-click="goAbout()"><a href="#">À propos</a></li>
                 <li><a ng-show="true" class='dropdown-button' data-activates='connexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
                 <li class="{{(state.current.name == 'app.home')?'active':''}}"><a href="#">Accueil</a></li>
                 <li class="{{(state.current.name == 'app.products')?'active':''}}"><a href="#">Produits</a></li>
-                <li class="{{(state.current.name == 'app.services')?'active':''}}"><a href="#">Services</a></li>
+                <li class="{{(state.current.name == 'app.services')?'active':''}}" ng-click="goServices()"><a href="#">Services</a></li>
                 <li class="{{(state.current.name == 'app.contact')?'active':''}}"><a href="#">Contact</a></li>
-                <li class="{{(state.current.name == 'app.about')?'active':''}}"><a href="#">À propos</a></li>
+                <li class="{{(state.current.name == 'app.about')?'active':''}}" ng-click="goAbout()"><a href="#">À propos</a></li>
                 <li><a ng-show="true" class='dropdown-button' data-activates='mobilConnexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
         </div>
