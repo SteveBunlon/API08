@@ -1,7 +1,4 @@
 var mongoose = require('mongoose');
-var housing = require('./housing.js');
-var bcrypt = require('bcrypt');
-var SALT_WORK_FACTOR = 10;
 
 var commandSchema = new mongoose.Schema({
     date: {type:Date, required: true},
