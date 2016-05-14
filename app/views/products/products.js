@@ -10,6 +10,6 @@ angular.module('polarApplication.products', ["ui.router"])
     });
 })
 
-.controller("homeCtrl",["$scope","$state", function ($scope, $state){    
+.controller("homeCtrl",["$scope","$state","$http", function ($scope, $state, $http){    
     
 }])

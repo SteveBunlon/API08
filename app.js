@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var mongoose = require('mongoose');
 var routes = require('./routes/index');
 
 var app = express();
@@ -19,6 +19,25 @@ app.use('/app', express.static(path.join(__dirname, 'app')));
 app.use('/views', express.static(path.join(__dirname, 'app/views')));
 
 app.use('/', routes);
+
+app.use(function (req, res, next) {
+
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Accesse -Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -55,5 +74,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
+//DB config
+mongoose.connect("mongodb://127.0.0.1:27017/Polar");
 
 module.exports = app;

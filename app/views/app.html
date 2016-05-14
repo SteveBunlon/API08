@@ -1,55 +1,99 @@
 <header>
-  <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">        
-        <img src="app/pictures/favicon.png" height="62"></img>      
-        <span>Le Polar </span>       
-      </a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
-        <li class="{{(state.current.name == 'app.home')?'active':''}}"><a href="#">Accueil</a></li>   
-        <li class="{{(state.current.name == 'app.products')?'active':''}}"><a href="#">Produits</a></li>
-        <li class="{{(state.current.name == 'app.services')?'active':''}}"><a href="#">Services</a></li>
-        <li class="{{(state.current.name == 'app.contact')?'active':''}}"><a href="#">Contact</a></li>
-        <li class="{{(state.current.name == 'app.about')?'active':''}}"><a href="#">À propos</a></li>
-        <li class="{{(state.current.name == 'app.connexion')?'active':''}}"><a href="#">Connexion</a></li>
-      </ul>
-      <ul class="side-nav" id="mobile-demo">
-       <li class="{{(state.current.name == 'app.home')?'active':''}}"><a href="#">Accueil</a></li>   
-        <li class="{{(state.current.name == 'app.products')?'active':''}}"><a href="#">Produits</a></li>
-        <li class="{{(state.current.name == 'app.services')?'active':''}}"><a href="#">Services</a></li>
-        <li class="{{(state.current.name == 'app.contact')?'active':''}}"><a href="#">Contact</a></li>
-        <li class="{{(state.current.name == 'app.about')?'active':''}}"><a href="#">À propos</a></li>
-        <li class="{{(state.current.name == 'app.connexion')?'active':''}}"><a href="#">Connexion</a></li>
-      </ul>
+    <!-- Connexion modal -->
+    <div id="connexionModal" class="modal">
+        <div class="modal-content">
+            <h3>Connectez vous</h3>
+            <span class="red-text" ng-if="loginError">{{loginError}}</span>
+            <form name="login" novalidate>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" ng-model="emailConnexion" name="email" type="email" required>
+                        <label for="email">Email</label>
+                        <span class="red-text" ng-show="(login.email.$dirty || login.$submitted) && login.email.$error.required">Votre mail est obligatoire</span>
+                        <span class="red-text" ng-show="login.$submitted && login.email.$invalid && !login.email.$error.required">Email invalide</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" type="password" class="validate" ng-model="passwordConnexion" name="password" required>
+                        <label for="password">Password</label>
+                        <span class="red-text" ng-show="(login.password.$dirty || login.$submitted) && login.password.$error.required">Mot de passe obligatoire</span>
+                    </div>
+                </div>
+                <div>
+                    <input type="submit" class="btn" ng-click="connexion()" value="Connexion"/>
+                    <a href class="modal-action modal-close btn">Annuler</a>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <div style="float:right;margin-right:20px">
+                Vous n'avez pas de compte ?<a class="modal-action modal-close" ng-click="subscribe()"> S'inscrire !</a>
+            </div>
+        </div>
     </div>
-  </nav>
+    <!--DropDown structure -->
+    <ul id='connexionDropdown' class='dropdown-content'>
+        <li><a ng-click="logout()">Utilisateur CAS</a></li>
+        <li><a href="#connexionModal" modal>Externe</a></li>
+    </ul>
+    <ul id='mobilConnexionDropdown' class='dropdown-content'>
+        <li><a ng-click="logout()">Utilisateur CAS</a></li>
+        <li><a href="#connexionModal" modal>Externe</a></li>
+    </ul>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">
+                <img src="app/pictures/favicon.png" height="62"></img>
+                <span>Le Polar </span>
+            </a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li class="{{(state.current.name == 'app.home')?'active':''}}"><a href="#">Accueil</a></li>
+                <li class="{{(state.current.name == 'app.products')?'active':''}}"><a ng-click="goProducts( )">Produits</a></li>
+                <li class="{{(state.current.name == 'app.services')?'active':''}}"><a href="#">Services</a></li>
+                <li class="{{(state.current.name == 'app.contact')?'active':''}}"><a href="#">Contact</a></li>
+                <li class="{{(state.current.name == 'app.about')?'active':''}}"><a href="#">À propos</a></li>
+                <li><a ng-show="true" class='dropdown-button' data-activates='connexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <li class="{{(state.current.name == 'app.home')?'active':''}}"><a href="#">Accueil</a></li>
+                <li class="{{(state.current.name == 'app.products')?'active':''}}"><a href="#">Produits</a></li>
+                <li class="{{(state.current.name == 'app.services')?'active':''}}"><a href="#">Services</a></li>
+                <li class="{{(state.current.name == 'app.contact')?'active':''}}"><a href="#">Contact</a></li>
+                <li class="{{(state.current.name == 'app.about')?'active':''}}"><a href="#">À propos</a></li>
+                <li><a ng-show="true" class='dropdown-button' data-activates='mobilConnexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
+        </div>
+    </nav>
 </header>
 <main>
-  <div ui-view ></div>
+    <a href="https://utc.cas.fr/cas/login?service=http://51.255.169.85:3000">click me</a>
+    <div ui-view></div>
 </main>
 <footer class="page-footer teal lighten-1">
- <div class="container">
-  <div class="row">
-    <div class="col l6 s12">
-      <h5 class="white-text">Footer Content</h5>
-      <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer
+                    content.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#">Link 1</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#">Link 2</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#">Link 3</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#">Link 4</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="col l4 offset-l2 s12">
-      <h5 class="white-text">Links</h5>
-      <ul>
-        <li><a class="grey-text text-lighten-3" href="#">Link 1</a></li>
-        <li><a class="grey-text text-lighten-3" href="#">Link 2</a></li>
-        <li><a class="grey-text text-lighten-3" href="#">Link 3</a></li>
-        <li><a class="grey-text text-lighten-3" href="#">Link 4</a></li>
-      </ul>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2016 Le Polar
+            <a href="#" class="right white-text">Nous contacter</a>
+        </div>
     </div>
-  </div>
-</div>
-<div class="footer-copyright">
-  <div class="container">
-    © 2016 Le Polar
-    <a href="#" class="right white-text">Nous contacter</a>
-  </div>
-</div>
 </footer>
