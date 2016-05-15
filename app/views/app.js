@@ -37,8 +37,7 @@ angular.module('polarApplication', ["polarApplication.services",
 
     $scope.goProducts = function($event){
         typeof event !== "undefined" // true
-        console.log($event)
-        $state.go("app.products",{ 'productsCategory' : $event});
+        $state.go("app.products",{ 'productsCategory' : $event}, {});
     }
 
     $scope.goServices= function(){
