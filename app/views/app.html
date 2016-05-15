@@ -32,6 +32,12 @@
             </div>
         </div>
     </div>
+    <ul id='decoMobileDropdown' class='dropdown-content'>
+        <li><a ng-click="logout()">Déconnexion</a></li>
+    </ul>
+    <ul id='decoDropdown' class='dropdown-content'>
+        <li><a ng-click="logout()">Déconnexion</a></li>
+    </ul>
     <!--DropDown structure -->
     <ul id='connexionDropdown' class='dropdown-content'>
         <li><a ng-click="logout()">Utilisateur CAS</a></li>
@@ -54,7 +60,11 @@
                 <li class="{{(state.current.name == 'app.services')?'active':''}}"><a href="#">Services</a></li>
                 <li class="{{(state.current.name == 'app.contact')?'active':''}}"><a href="#">Contact</a></li>
                 <li class="{{(state.current.name == 'app.about')?'active':''}}"><a href="#">À propos</a></li>
-                <li><a ng-show="true" class='dropdown-button' data-activates='connexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a ng-show="!connected" class='dropdown-button' data-activates='connexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a ng-show="connected" class='dropdown-button' data-activates='decoDropdown' dropdown>
+                    <i class="material-icons right">arrow_drop_down</i>
+                    chien
+                </a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
                 <li class="{{(state.current.name == 'app.home')?'active':''}}"><a href="#">Accueil</a></li>
@@ -62,7 +72,11 @@
                 <li class="{{(state.current.name == 'app.services')?'active':''}}"><a href="#">Services</a></li>
                 <li class="{{(state.current.name == 'app.contact')?'active':''}}"><a href="#">Contact</a></li>
                 <li class="{{(state.current.name == 'app.about')?'active':''}}"><a href="#">À propos</a></li>
-                <li><a ng-show="true" class='dropdown-button' data-activates='mobilConnexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a ng-show="!connected" class='dropdown-button' data-activates='mobilConnexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a ng-show="connected" class='dropdown-button' data-activates='decoMobileDropdown' dropdown>
+                    <i class="material-icons right">arrow_drop_down</i>
+                    chien
+                </a></li>
             </ul>
         </div>
     </nav>
