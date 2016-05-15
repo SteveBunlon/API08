@@ -47,6 +47,30 @@
         <li><a ng-click="logout()">Utilisateur CAS</a></li>
         <li><a href="#connexionModal" modal>Externe</a></li>
     </ul>
+    <ul id='servicesDropdown' class='dropdown-content'>
+        <li><a ng-click="goServices()">Poster</a></li>
+        <li><a ng-click="goServices()">Annales</a></li>
+        <li><a ng-click="goServices()">Billeterie</a></li>
+        <li><a ng-click="goServices()">Location</a></li>
+        <li><a ng-click="goServices()">Compte asso</a></li>
+    </ul>
+    <ul id='mobilServicesDropdown' class='dropdown-content'>
+        <li><a ng-click="goServices()">Poster</a></li>
+        <li><a ng-click="goServices()">Annales</a></li>
+        <li><a ng-click="goServices()">Billeterie</a></li>
+        <li><a ng-click="goServices()">Location</a></li>
+        <li><a ng-click="goServices()">Compte asso</a></li>
+    </ul>
+    <ul id='productsDropdown' class='dropdown-content'>
+        <li><a ng-click="goProducts('impressionTab')">Impressions</a></li>
+        <li><a ng-click="goProducts('furnitureTab')">Fournitures</a></li>
+        <li><a ng-click="goProducts('ITProvisionTab')">Informatique</a></li>
+    </ul>
+    <ul id='mobileProductsDropdown' class='dropdown-content'>
+        <li><a ng-click="goProducts()">Impressions</a></li>
+        <li><a ng-click="goProducts()">Fournitures</a></li>
+        <li><a ng-click="goProducts()">Informatique</a></li>
+    </ul>
     <nav>
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">

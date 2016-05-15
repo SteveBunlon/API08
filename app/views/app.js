@@ -1,4 +1,11 @@
-angular.module('polarApplication', ["polarApplication.services","ui.router", "polarApplication.home",'ui.materialize'])
+angular.module('polarApplication', ["polarApplication.services",
+    "ui.router",
+    "polarApplication.home",
+    "polarApplication.products",
+    "polarApplication.service",
+    "polarApplication.about",
+    "polarApplication.commands",
+    'ui.materialize'])
 
 .config(function ($stateProvider){
     
@@ -15,14 +22,32 @@ angular.module('polarApplication', ["polarApplication.services","ui.router", "po
 
 .run(function ($state, $http) {
     $state.go("app.home");
- }) 
+ })
 
 .controller("appCtrl",["$scope","$state","loginService","AuthenticationService", function ($scope, $state, loginService, AuthenticationService){
     $(".button-collapse").sideNav();
     $scope.state = $state;
 
-    $scope.goProducts = function(){
-        $state.go("app.products");
+    $scope.goHome = function(){
+        $state.go("app.home");
+    }
+
+    $scope.goProducts = function($event){
+        typeof event !== "undefined" // true
+        console.log($event)
+        $state.go("app.products",{ 'productsCategory' : $event});
+    }
+
+    $scope.goServices= function(){
+        $state.go("app.service");
+    }
+
+    $scope.goAbout = function(){
+        $state.go("app.about");
+    }
+
+    $scope.goCommands= function(){
+        $state.go("app.commands");
     }
 
     $scope.connexion = function(){
