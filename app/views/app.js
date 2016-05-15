@@ -14,7 +14,8 @@ angular.module('polarApplication', ["polarApplication.services",
         url: "/app",
         abstract:true,            
         templateUrl: "views/app.html",
-        controller: "appCtrl",      
+        controller: "appCtrl",
+        reload: "true"
     });
 })
 
@@ -24,7 +25,9 @@ angular.module('polarApplication', ["polarApplication.services",
     $state.go("app.home");
  })
 
-.controller("appCtrl",["$scope","$state","loginService","AuthenticationService", function ($scope, $state, loginService, AuthenticationService){
+.controller("appCtrl",["$window","$scope","$state","loginService","AuthenticationService", function ($window,$scope, $state, loginService, AuthenticationService){
+    $scope.connected = AuthenticationService.isLogged();
+
     $(".button-collapse").sideNav();
     $scope.state = $state;
 
@@ -56,7 +59,7 @@ angular.module('polarApplication', ["polarApplication.services",
                 AuthenticationService.createSession(JSON.parse($dataObject.data.user), $dataObject.data.token);
                 $('#connexionModal').closeModal();
                 $scope.passwordConnexion = $scope.emailConnexion = "";
-                $state.go("app.home")
+                $state.reload();
             }, function($dataObject){
                 $scope.errConnexionMessage = "Une erreur s'est produite, veuillez ré-éssayer ou contacter le Polar.";
             })
@@ -64,6 +67,11 @@ angular.module('polarApplication', ["polarApplication.services",
     }
 
     $scope.logout = function(){
-        alert("hello");
+        loginService.logout();
+        $state.reload();
+    }
+
+    $scope.isLogged = function(){
+        AuthenticationService.isLogged();
     }
 }])
