@@ -13,10 +13,10 @@ angular.module('polarApplication.products', ["ui.router"])
     });
 })
 
-.controller("productsCtrl",["$scope","$state","$http", function ($scope, $state, $http){
-    $scope.productsCategory = $state.productsCategory;
-    $(document).ready(function(){
-        $('ul.tabs').tabs('select_tab', $scope.productsCategory);
-    });
-
+.controller("productsCtrl",["$scope","$state","$http","$timeout", function ($scope, $state, $http, $timeout){
+    $timeout(function() {
+        angular.element(document).ready(function () {
+            $('ul.tabs').tabs('select_tab', stateParams.productsCategory);
+        });
+    })
 }])
