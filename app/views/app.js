@@ -24,14 +24,29 @@ angular.module('polarApplication', ["polarApplication.services",
     });
 })
 
-.constant("API_URL", "http://localhost:3000")
+.constant("API_URL", "http://51.255.169.85:3001")
 
-.run(function ($state, $http) {
+.run(function ($state, $http, loginService, AuthenticationService) {
+    //we connect the user if the CAS returned us a student
+    if($('#username')[0] && $('#toDisplay')[0] && $('#username')[0].attributes.value &&  $('#toDisplay')[0].attributes.value && $('#username')[0].attributes.value.value &&  $('#toDisplay')[0].attributes.value.value){
+        console.log("requested"+$('#username')[0].attributes.value.value);
+        loginService.loginFromCas($('#username')[0].attributes.value.value).then(function($dataObject){
+            console.log($dataObject);
+            AuthenticationService.createSession(JSON.parse($dataObject.data.user), $dataObject.data.token);
+            $state.go("app.home");
+            return;
+        }, function($dataObject){
+            console.log($dataObject.data);
+        });
+    }
     $state.go("app.home");
  })
 
 .controller("appCtrl",["$window","$scope","$state","loginService","AuthenticationService", function ($window,$scope, $state, loginService, AuthenticationService){
     $scope.connected = AuthenticationService.isLogged();
+
+    if($scope.connected)
+        $scope.user = AuthenticationService.getUserLogged();
 
     $(".button-collapse").sideNav();
     $scope.state = $state;
@@ -93,6 +108,7 @@ angular.module('polarApplication', ["polarApplication.services",
 
     $scope.logout = function(){
         loginService.logout();
+        $('.button-collapse').sideNav('hide');
         $state.reload();
     }
 

@@ -27,6 +27,10 @@ angular.module('polarApplication.services', [])
             logout: function (){
                 AuthenticationService.endSession();
                 $state.go("app.home",{},{reload:true});
+            },
+            loginFromCas: function(username){
+                console.log(apiUrl.getApiUrl() + "/caslogin");
+                return $http.post(apiUrl.getApiUrl() + "/caslogin", {username:username});
             }
         }
     }])
