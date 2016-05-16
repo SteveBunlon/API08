@@ -71,7 +71,7 @@ router.get('/cas', function(req, res, next) {
     });
 });
 
-router.post('.api/casLogin', function(req, res, next){
+router.post('api/casLogin', function(req, res, next){
     var mail = req.body.mail || '';
 
     if (mail == '') {
