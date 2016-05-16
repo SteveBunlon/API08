@@ -83,7 +83,7 @@ router.post('api/casLogin', function(req, res, next){
     }, function(err, user) {
         if (err) {
             console.log(err);
-            return res.sendStatus(401);
+            return res.status(401).send("Error while looking for a user in base");
         } else {
             if(user){
                 var token = jwt.sign(user, "vnqfdmvqfnvqmernvmeqnvmqrehqùebnqZ43565TGV2R24GVFVDdsvQ%vmdsfbqf", {
@@ -95,7 +95,7 @@ router.post('api/casLogin', function(req, res, next){
                 });
             }else{
                 console.log("no users found");
-                res.sendStatus(401);
+                res.status(401).send("No user for the username specified");
             }
         }
     })
