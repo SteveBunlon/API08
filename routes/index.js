@@ -72,6 +72,7 @@ router.get('/cas', function(req, res, next) {
 });
 
 router.post('/api/casLogin', function(req, res, next){
+    console.log("chien");
     var mail = req.body.username || '';
 
     if (mail == '') {
