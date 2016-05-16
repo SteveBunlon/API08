@@ -24,7 +24,7 @@ angular.module('polarApplication', ["polarApplication.services",
 
 .run(function ($state, $http, loginService) {
     //we connect the user if the CAS returned us a student
-    if($('#username')[0] && $('#toDisplay')[0] && $('#username')[0].attributes.value.value &&  $('#toDisplay')[0].attributes.value.value){
+    if($('#username')[0] && $('#toDisplay')[0] && $('#username')[0].attributes.value &&  $('#toDisplay')[0].attributes.value && $('#username')[0].attributes.value.value &&  $('#toDisplay')[0].attributes.value.value){
         loginService.loginFromCas().then(function($dataObject){
             AuthenticationService.createSession(JSON.parse($dataObject.data.user), $dataObject.data.token);
         }, function($dataObject){
