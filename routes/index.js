@@ -72,13 +72,13 @@ router.get('/cas', function(req, res, next) {
 });
 
 router.post('api/casLogin', function(req, res, next){
-    var mail = req.body.mail || '';
+    var mail = req.body.username || '';
 
     if (mail == '') {
-        return res.sendStatus(401);
+        return res.status(401).send("No username provided");
     }
     user.findOne({
-        mail: mail,
+        casUsername: mail,
         from: "cas"
     }, function(err, user) {
         if (err) {
