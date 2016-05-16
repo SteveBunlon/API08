@@ -5,7 +5,6 @@
 angular.module('polarApplication.services', [])
 
     .factory('apiUrl', function (API_URL){
-        console.log("hello", API_URL);
         return {
             getApiUrl:function(){
                 return API_URL+"/api";
@@ -13,6 +12,13 @@ angular.module('polarApplication.services', [])
         }
     })
 
+    .factory('productService', ["$http", "apiUrl", function($http, apiUrl){
+        return {
+            getProducts:function(){
+                return $http.post(apiUrl.getApiUrl() + "/products",{});
+            }
+        }
+    }])
     .factory('loginService', ['$http', 'apiUrl','AuthenticationService','$state', function ($http, apiUrl, AuthenticationService, $state){
         return {
             login:function (email, pass){

@@ -2,13 +2,26 @@ var express = require('express'),
 	router = express.Router(),
 	path = require('path'),
     user = require('../models/users.js'),
+    product = require('../models/products.js'),
     jwt =  require('jsonwebtoken');
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    product.find({}, function(err,products){
+        console.log(products[0]);
+    });
   res.sendFile(path.join(__dirname + '/../app/index.html'));
 });
+
+router.post('/api/products', function(req, res, next){
+    product.find({}, function(err, data){
+        if(err)
+            res.status(500).send();
+        else
+            res.json(JSON.stringify(data));
+    })
+})
 
 router.post('/api/login', function(req, res, next) {
     var mail = req.body.mail || '',

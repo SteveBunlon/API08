@@ -93,8 +93,8 @@
                     </a>
                 </li>
                 <li class="{{(state.current.name == 'app.services')?'active':''}}"><a href="#">Services</a></li>
-                <li class="{{(state.current.name == 'app.contact')?'active':''}}"><a href="#">Contact</a></li>
-                <li class="{{(state.current.name == 'app.about')?'active':''}}"><a href="#">À propos</a></li>
+                <li class="{{(state.current.name == 'app.contact')?'active':''}}" ng-click="goContact()"><a href="#">Contact</a></li>
+                <li class="{{(state.current.name == 'app.about')?'active':''}}" ng-click="goAbout()"><a href="#">À propos</a></li>
                 <li><a ng-show="!connected" class='dropdown-button' data-activates='connexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a ng-show="connected" class='dropdown-button' data-activates='decoDropdown' dropdown>
                     <i class="material-icons right">arrow_drop_down</i>

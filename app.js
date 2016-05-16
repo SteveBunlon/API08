@@ -17,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/app', express.static(path.join(__dirname, 'app')));
 app.use('/views', express.static(path.join(__dirname, 'app/views')));
+app.use('/uploads',express.static(path.join(__dirname, 'uploads')));
+
 
 app.use('/', routes);
 

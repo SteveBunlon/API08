@@ -4,6 +4,7 @@ angular.module('polarApplication', ["polarApplication.services",
     "polarApplication.products",
     "polarApplication.service",
     "polarApplication.about",
+    "polarApplication.contact",
     "polarApplication.commands",
     'ui.materialize'])
 
@@ -46,6 +47,10 @@ angular.module('polarApplication', ["polarApplication.services",
 
     $scope.goAbout = function(){
         $state.go("app.about");
+    }
+
+    $scope.goContact= function(){
+        $state.go("app.contact");
     }
 
     $scope.goCommands= function(){
