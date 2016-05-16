@@ -29,7 +29,7 @@ router.get('/cas', function(req, res, next) {
                 res.status(500).send();
             var usernameFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:user"][0],
                 toDisplayFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:cn"][0];
-
+            console.log(usernameFromXml);
             //looking if the user exists
             user.find({mail:usernameFromXml}, function(err, data){
                 if(err)
@@ -39,7 +39,7 @@ router.get('/cas', function(req, res, next) {
                     if(data == undefined || data == "" || data == null){
                         var lastName = toDisplayFromXml.split(" ")[1],
                             firstName = toDisplayFromXml.split(" ")[0];
-                        var newUser = new user({mail:usernameFromXml, lastName:lastName, firstName:firstName, from:"cas"});
+                        var newUser = new user({mail:usernameFromXml, lastname:lastName, firstname:firstName, from:"cas"});
                         newUser.save(function(err){
                             if(err){
                                 console.log(err);
