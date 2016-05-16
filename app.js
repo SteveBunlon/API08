@@ -6,11 +6,25 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var routes = require('./routes/index');
+var mailer = require('express-mailer');
 
 var app = express();
 
+mailer.extend(app, {
+    from: 'no-reply@PoalarUtc.com',
+    host: 'smtp.gmail.com', // hostname
+    secureConnection: true, // use SSL
+    port: 465, // port for secure SMTP
+    transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+    auth: {
+        user: 'bunlon.steve@gmail.com',
+        pass: 'steakachier11'
+    }
+});
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+var mailRoutes = require('./routes/mailer')(app);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,6 +32,7 @@ app.use(cookieParser());
 app.use('/app', express.static(path.join(__dirname, 'app')));
 app.use('/views', express.static(path.join(__dirname, 'app/views')));
 app.use('/uploads',express.static(path.join(__dirname, 'uploads')));
+app.use('/api/mail', mailRoutes);
 
 
 app.use('/', routes);

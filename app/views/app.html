@@ -87,6 +87,7 @@
             </a>
             <a href="#" data-activates="mobile-demo" class="button-collapse" data-closeonclick="false"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
+                <li ng-if="user && user.accountType=='admin'" class="{{(state.current.name == 'app.users')?'active':''}}" ng-click="goUsers()"><a href="#">Utilisateurs</a></li>
                 <li class="{{(state.current.name == 'app.home')?'active':''}}" ng-click="goHome()"><a href="#">Accueil</a></li>
                 <li>
                     <a ng-show="true" class='dropdown-button' data-activates='productsDropdown' dropdown>
@@ -114,6 +115,7 @@
                 </a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
+                <li ng-if="user && user.accountType=='admin'" class="{{(state.current.name == 'app.users')?'active':''}}" ng-click="goUsers()"><a href="#">Utilisateurs</a></li>
                 <li class="{{(state.current.name == 'app.home')?'active':''}}"><a href="#">Accueil</a></li>
                 <li class="{{(state.current.name == 'app.products')?'active':''}}"><a href="#">Produits</a></li>
                 <li class="{{(state.current.name == 'app.services')?'active':''}}"><a href="#">Services</a></li>

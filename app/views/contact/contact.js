@@ -13,6 +13,15 @@ angular.module('polarApplication.contact', ["ui.router"])
             });
     })
 
-    .controller("contactCtrl",["$scope","$state", function ($scope, $state){
-
+    .controller("contactCtrl",["mailService","$scope","$state", function (mailService,$scope, $state){
+        console.log($scope.user);
+        $scope.sendMail = function(){
+            mailService.contactMail($scope.mail, $scope.subject, $scope.text).then(function($dataObject){
+                $scope.mail = $scope.subject = $scope.text = "";
+                alert("Votre mail a été envoyé avec success");
+            }, function($dataObject){
+                console.log($dataObject.data);
+                alert("Votre mail n'a pas été envoyé, veuillez réessayé ultérieuement");
+            })
+        };
     }])

@@ -11,12 +11,12 @@
         <div class="row" >
             <div class="s10 offset-s1 col">
                 <div class="row">
-                    <div class="col m4 animated fadeInUp"
+                    <div ng-if="{{products.length > 0}}" class="col m4 animated fadeInUp"
                          style="-webkit-animation-duration:300ms"
                          ng-repeat="p in products">
                         <div class="card teal lighten-1" ng-if="p.category == 'impression'">
                             <div class="card-image waves-effect waves-light">
-                                <img ng-click="editProduct(p.name,p.price)" class="responsive-img" src="{{p.img}}">
+                                <img ng-click="editProduct(p.name,p.price)" class="responsive-img" ng-src="{{p.img}}">
                             </div>
                             <div class="card-content">
                                 <span>{{p.name}}</span>
@@ -41,7 +41,7 @@
         <div class="row" >
             <div class="s10 offset-s1 col">
                 <div class="row">
-                    <div class="col m4 animated fadeInUp"
+                    <div ng-if="{{products.length > 0}}" class="col m4 animated fadeInUp"
                          style="-webkit-animation-duration:300ms"
                          ng-repeat="p in products">
                         <div class="card teal lighten-1" ng-if="p.category == 'furniture'">
@@ -71,7 +71,7 @@
         <div class="row" >
             <div class="s10 offset-s1 col">
                 <div class="row">
-                    <div class="col m4 animated fadeInUp"
+                    <div ng-if="{{products.length > 0}}" class="col m4 animated fadeInUp"
                          style="-webkit-animation-duration:300ms"
                          ng-repeat="p in products">
                         <div class="card teal lighten-1" ng-if="p.category == 'ITProvision'">

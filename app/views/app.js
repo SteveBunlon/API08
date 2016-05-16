@@ -10,7 +10,8 @@ angular.module('polarApplication', ["polarApplication.services",
     "polarApplication.annalsOrder",
     "polarApplication.team",
     "polarApplication.commands",
-    'ui.materialize'])
+    'ui.materialize',
+    'polarApplication.users'])
 
 .config(function ($stateProvider){
     
@@ -24,7 +25,7 @@ angular.module('polarApplication', ["polarApplication.services",
     });
 })
 
-.constant("API_URL", "http://51.255.169.85:3001")
+.constant("API_URL", "http://localhost:3001")
 
 .run(function ($state, $http, loginService, AuthenticationService) {
     //we connect the user if the CAS returned us a student
@@ -50,6 +51,11 @@ angular.module('polarApplication', ["polarApplication.services",
 
     $(".button-collapse").sideNav();
     $scope.state = $state;
+
+    $scope.goUsers = function(){
+        if($scope.user && $scope.user.accountType == "admin")
+            $state.go("app.users");
+    }
 
     $scope.goHome = function(){
         $state.go("app.home");

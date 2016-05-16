@@ -34,6 +34,23 @@ angular.module('polarApplication.services', [])
             }
         }
     }])
+    .factory('mailService', ['$http', 'apiUrl', function ($http, apiUrl){
+        return {
+            contactMail:function (mail, subject, text){
+                return $http.post(apiUrl.getApiUrl() + "/mail/contact",{mail:mail, text:text, subject:subject});
+            },
+        }
+    }])
+    .factory('usersService', ['$http', 'apiUrl', function ($http, apiUrl){
+        return {
+            getAll:function(){
+                return $http.post(apiUrl.getApiUrl() + "/users",{});
+            },
+            new:function(lastName, firstName, mail, password, accountType){
+                return $http.post(apiUrl.getApiUrl() + "/users/new", {lastName:lastName, firstName:firstName, mail:mail,password:password, accountType:accountType});
+            }
+        }
+    }])
     .factory('AuthenticationService',['$window', function ($window){
         return {
             isAuthenticated:false,
