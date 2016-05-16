@@ -2,12 +2,128 @@
     <div class="col s12">
         <ul class="tabs" tabs>
             <li class="tab col s3"><a href="#impressionTab">Impressions</a></li>
-            <li class="tab col s3"><a href="#furniturTab">Fournitures</a></li>
+            <li class="tab col s3"><a href="#furnitureTab">Fournitures</a></li>
             <li class="tab col s3"><a href="#ITProvisionTab">Informatique</a></li>
         </ul>
     </div>
-    <div id="impressionTab" class="col s12">Test 1</div>
-    <div id="furnitureTab" class="col s12">Test 2</div>
-    <div id="ITProvisionTab" class="col s12">Test 3</div>
+    <div id="impressionTab" class="col s12">
+        <br>
+        <div class="row" >
+            <div class="s10 offset-s1 col">
+                <div class="row">
+                    <div class="col m4 animated fadeInUp"
+                         style="-webkit-animation-duration:300ms"
+                         ng-repeat="p in products">
+                        <div class="card teal lighten-1" ng-if="p.category == 'impression'">
+                            <div class="card-image waves-effect waves-light">
+                                <img class="responsive-img" src="{{p.img}}">
+                            </div>
+                            <div class="card-action">
+                                <span class="card-title">{{p.name}}</span>
+                                <span class="card-content">{{p.price}}</span>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col m2 hide-on-small-only">&nbsp;</div>
+                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-face-unlock"></i></a></div>
+                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-highlight-remove"></i></a></div>
+                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-alarm-on"></i></a></div>
+                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-account-balance"></i></a></div>
+                                <div class="col m2 .hide-on-small-only">&nbsp;</div>
+                            </div>
+                        </div><!--/card-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="furnitureTab" class="col s12">
+        <br>
+        <div class="row" >
+            <div class="s10 offset-s1 col">
+                <div class="row">
+                    <div class="col m4 animated fadeInUp"
+                         style="-webkit-animation-duration:300ms"
+                         ng-repeat="p in products">
+                        <div class="card teal lighten-1" ng-if="p.category == 'furniture'">
+                            <div class="card-image waves-effect waves-light">
+                                <img ng-click="editProduct(p.name,p.price)" class="responsive-img" src="{{p.img}}">
+                            </div>
+                            <div class="card-content">
+                                <span>{{p.name}}</span>
+                                <span>{{p.price}}</span>
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col m2 hide-on-small-only">&nbsp;</div>
+                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-face-unlock"></i></a></div>
+                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-highlight-remove"></i></a></div>
+                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-alarm-on"></i></a></div>
+                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-account-balance"></i></a></div>
+                                <div class="col m2 .hide-on-small-only">&nbsp;</div>
+                            </div>
+                        </div><!--/card-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ITProvisionTab" class="col s12">
+        <br>
+        <div class="row" >
+            <div class="s10 offset-s1 col">
+                <div class="row">
+                    <div class="col m4 animated fadeInUp"
+                         style="-webkit-animation-duration:300ms"
+                         ng-repeat="p in products">
+                        <div class="card teal lighten-1" ng-if="p.category == 'ITProvision'">
+                            <div class="card-image waves-effect waves-light">
+                                <img class="responsive-img activator" src="{{p.img}}">
+                            </div>
+                            <div class="card-content">
+                                <span>{{p.name}}</span>
+                                <span>{{p.price}}</span>
+                            </div>
+                            <div class="card-reveal"> <!-- TODO ADD securisation acces-->
+                                <div class="input-field">
+                                    <input value="{{p.name}}" id="name" type="text" class="validate">
+                                    <label class="active" for="name">Nom</label>
+                                    <input value="{{p.price}}" id="price" type="number" class="validate">
+                                    <label class="active" for="price">Prix unitaire</label>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col m2 hide-on-small-only">&nbsp;</div>
+                            <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-face-unlock"></i></a></div>
+                            <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-highlight-remove"></i></a></div>
+                            <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-alarm-on"></i></a></div>
+                            <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-account-balance"></i></a></div>
+                            <div class="col m2 .hide-on-small-only">&nbsp;</div>
+                        </div>
+                    </div><!--/card-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="updateProductModal" class="modal">
+    <div class="modal-content">
+        <h4>Modal Header</h4>
+        <div class="input-field" >
+            <i class="material-icons prefix">description</i>
+            <input ng-model="name" id="icon_name" type="text" class="validate">
+            <label for="icon_name"></label>
+            <i class="material-icons prefix">euro_symbol</i>
+            <input ng-model="price" id="icon_price" type="number" class="validate">
+            <label for="icon_price"></label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Valider</a>
+    </div>
 </div>
 

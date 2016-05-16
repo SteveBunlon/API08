@@ -79,11 +79,22 @@
             </a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li class="{{(state.current.name == 'app.home')?'active':''}}"><a href="#">Accueil</a></li>
-                <li class="{{(state.current.name == 'app.products')?'active':''}}"><a ng-click="goProducts( )">Produits</a></li>
+                <li class="{{(state.current.name == 'app.home')?'active':''}}" ng-click="goHome()"><a href="#">Accueil</a></li>
+                <li>
+                    <a ng-show="true" class='dropdown-button' data-activates='productsDropdown' dropdown>
+                        Produits
+                    <i class="material-icons right">arrow_drop_down</i>
+                    </a>
+                </li>
+                <li>
+                    <a ng-show="true" class='dropdown-button' data-activates='servicesDropdown' dropdown>
+                        Services
+                    <i class="material-icons right">arrow_drop_down</i>
+                    </a>
+                </li>
                 <li class="{{(state.current.name == 'app.services')?'active':''}}"><a href="#">Services</a></li>
-                <li class="{{(state.current.name == 'app.contact')?'active':''}}"><a href="#">Contact</a></li>
-                <li class="{{(state.current.name == 'app.about')?'active':''}}"><a href="#">À propos</a></li>
+                <li class="{{(state.current.name == 'app.contact')?'active':''}}" ng-click="goContact()"><a href="#">Contact</a></li>
+                <li class="{{(state.current.name == 'app.about')?'active':''}}" ng-click="goAbout()"><a href="#">À propos</a></li>
                 <li><a ng-show="!connected" class='dropdown-button' data-activates='connexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a ng-show="connected" class='dropdown-button' data-activates='decoDropdown' dropdown>
                     <i class="material-icons right">arrow_drop_down</i>

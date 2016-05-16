@@ -4,6 +4,7 @@ angular.module('polarApplication', ["polarApplication.services",
     "polarApplication.products",
     "polarApplication.service",
     "polarApplication.about",
+    "polarApplication.contact",
     "polarApplication.commands",
     'ui.materialize'])
 
@@ -37,8 +38,7 @@ angular.module('polarApplication', ["polarApplication.services",
 
     $scope.goProducts = function($event){
         typeof event !== "undefined" // true
-        console.log($event)
-        $state.go("app.products",{ 'productsCategory' : $event});
+        $state.go("app.products",{ 'productsCategory' : $event}, {});
     }
 
     $scope.goServices= function(){
@@ -47,6 +47,10 @@ angular.module('polarApplication', ["polarApplication.services",
 
     $scope.goAbout = function(){
         $state.go("app.about");
+    }
+
+    $scope.goContact= function(){
+        $state.go("app.contact");
     }
 
     $scope.goCommands= function(){

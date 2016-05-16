@@ -4,12 +4,13 @@ var express = require('express'),
     user = require('../models/users.js'),
     jwt =  require('jsonwebtoken'),
     request = require('request'),
-    parseString = require('xml2js').parseString;
+    parseString = require('xml2js').parseString,
+    product = require('../models/products.js');
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.sendFile(path.join(__dirname + '/../app/index.html'));
+  res.sendFile(path.join(__dirname + '/../app/index.html'));
 });
 
 
@@ -30,10 +31,19 @@ router.get('/cas', function(req, res, next) {
 });
 
 
+router.post('/api/products', function(req, res, next){
+    product.find({}, function(err, data){
+        if(err)
+            res.status(500).send();
+        else
+            res.json(JSON.stringify(data));
+    })
+})
+
 router.post('/api/login', function(req, res, next) {
     var mail = req.body.mail || '',
         password = req.body.password || '';
-    console.log(mail, password);
+
     if (mail == '' || password == '') {
         return res.sendStatus(401);
     }
