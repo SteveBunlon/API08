@@ -31,7 +31,7 @@ angular.module('polarApplication', ["polarApplication.services",
             $state.reload();
             return;
         }, function($dataObject){
-            console.log("error while receiving the token for cas user");
+            console.log($dataObject.data);
         });
     }
     $state.go("app.home");
