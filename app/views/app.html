@@ -98,7 +98,7 @@
                 <li><a ng-show="!connected" class='dropdown-button' data-activates='connexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a ng-show="connected" class='dropdown-button' data-activates='decoDropdown' dropdown>
                     <i class="material-icons right">arrow_drop_down</i>
-                    chien
+                    {{user.firstname}}{{user.lastname}}
                 </a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
@@ -110,7 +110,7 @@
                 <li><a ng-show="!connected" class='dropdown-button' data-activates='mobilConnexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a ng-show="connected" class='dropdown-button' data-activates='decoMobileDropdown' dropdown>
                     <i class="material-icons right">arrow_drop_down</i>
-                    chien
+                    {{user.firstname}}{{user.lastname}}
                 </a></li>
             </ul>
         </div>

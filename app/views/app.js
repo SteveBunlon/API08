@@ -29,7 +29,7 @@ angular.module('polarApplication', ["polarApplication.services",
         loginService.loginFromCas($('#username')[0].attributes.value.value).then(function($dataObject){
             console.log($dataObject);
             AuthenticationService.createSession(JSON.parse($dataObject.data.user), $dataObject.data.token);
-            $state.reload();
+            $state.go("app.home");
             return;
         }, function($dataObject){
             console.log($dataObject.data);
@@ -40,6 +40,9 @@ angular.module('polarApplication', ["polarApplication.services",
 
 .controller("appCtrl",["$window","$scope","$state","loginService","AuthenticationService", function ($window,$scope, $state, loginService, AuthenticationService){
     $scope.connected = AuthenticationService.isLogged();
+
+    if($scope.connected)
+        $scope.user = AuthenticationService.getUserLogged();
 
     $(".button-collapse").sideNav();
     $scope.state = $state;
