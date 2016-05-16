@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
 router.get('/cas', function(req, res, next) {
     console.log(req.query.ticket);
     request("https://cas.utc.fr/cas/serviceValidate?service=http://51.255.169.85:3001/cas&ticket="+req.query.ticket, function(error, response, body){
-        if(err)
+        if(error)
             res.status(500).send();
         //Parse the user received
         parseString(body, function (err, result) {
