@@ -26,7 +26,10 @@ angular.module('polarApplication', ["polarApplication.services",
     //we connect the user if the CAS returned us a student
     if($('#username')[0] && $('#toDisplay')[0] && $('#username')[0].attributes.value &&  $('#toDisplay')[0].attributes.value && $('#username')[0].attributes.value.value &&  $('#toDisplay')[0].attributes.value.value){
         loginService.loginFromCas().then(function($dataObject){
+            console.log($dataObject);
             AuthenticationService.createSession(JSON.parse($dataObject.data.user), $dataObject.data.token);
+            $state.reload();
+            return;
         }, function($dataObject){
             console.log("error while receiving the token for cas user");
         });

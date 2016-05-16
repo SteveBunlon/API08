@@ -15,6 +15,16 @@ router.get('/', function(req, res, next) {
       toDisplay : "",
     });
 });
+router.post('/api/products', function(req, res, next){
+    product.find({}, function(err, data){
+        if(err)
+            res.status(500).send();
+        else
+            res.json(JSON.stringify(data));
+    })
+})
+
+
 
 
 
@@ -29,27 +39,28 @@ router.get('/cas', function(req, res, next) {
             if(err)
                 res.status(500).send();
             var usernameFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:user"][0],
-                toDisplayFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:cn"][0];
+                toDisplayFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:cn"][0],
+                mailFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:mail"][0];
             console.log(usernameFromXml);
             //looking if the user exists
             user.find({mail:usernameFromXml}, function(err, data){
                 if(err)
                     res.status(500).send();
                 else
-                    //if it doesn't exist we create it
-                    if(data == undefined || data == "" || data == null){
-                        var lastName = toDisplayFromXml.split(" ")[1],
-                            firstName = toDisplayFromXml.split(" ")[0];
-                        var newUser = new user({mail:usernameFromXml, lastname:lastName, firstname:firstName, from:"cas"});
-                        newUser.save(function(err){
-                            if(err){
-                                console.log(err);
-                                res.status(500).send();
-                            }
-                            else
-                                console.log("user created successfuly");
-                        })
-                    }
+                //if it doesn't exist we create it
+                if(data == undefined || data == "" || data == null){
+                    var lastName = toDisplayFromXml.split(" ")[1],
+                        firstName = toDisplayFromXml.split(" ")[0];
+                    var newUser = new user({casUsername:usernameFromXml,mail:mailFromXml, lastname:lastName, firstname:firstName, from:"cas"});
+                    newUser.save(function(err){
+                        if(err){
+                            console.log(err);
+                            res.status(500).send();
+                        }
+                        else
+                            console.log("user created successfuly");
+                    })
+                }
             })
             //sending the info saying that we need to connect a CAS user
             res.render(path.join(__dirname + '/../app/index.jade'), {
@@ -59,16 +70,6 @@ router.get('/cas', function(req, res, next) {
         });
     });
 });
-
-
-router.post('/api/products', function(req, res, next){
-    product.find({}, function(err, data){
-        if(err)
-            res.status(500).send();
-        else
-            res.json(JSON.stringify(data));
-    })
-})
 
 router.post('.api/casLogin', function(req, res, next){
     var mail = req.body.mail || '';

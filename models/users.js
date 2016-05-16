@@ -12,7 +12,8 @@ var userSchema = new mongoose.Schema({
     firstname: {type:String, required: true},
     commands: [commandSchema],
     password: {type:String},
-    from: {type:String, enum:["cas", "ext"],required:true}
+    from: {type:String, enum:["cas", "ext"],required:true},
+    casUsername: {type:String}
 });
 
 // Bcrypt middleware on UserSchema
