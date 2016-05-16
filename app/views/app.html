@@ -33,7 +33,7 @@
         </div>
     </div>
     <ul id='decoMobileDropdown' class='dropdown-content'>
-        <li><a href="https://cas.utc.fr/cas/login?service=http://51.255.169.85:3001/cas">Déconnexion</a></li>
+        <li><a ng-click=logout()">Déconnexion</a></li>
     </ul>
     <ul id='decoDropdown' class='dropdown-content'>
         <li><a ng-click="logout()">Déconnexion</a></li>
@@ -44,7 +44,7 @@
         <li><a href="#connexionModal" modal>Externe</a></li>
     </ul>
     <ul id='mobilConnexionDropdown' class='dropdown-content'>
-        <li><a ng-click="logout()">Utilisateur CAS</a></li>
+        <li><a href="https://cas.utc.fr/cas/login?service=http://51.255.169.85:3001/cas">Utilisateur CAS</a></li>
         <li><a href="#connexionModal" modal>Externe</a></li>
     </ul>
     <ul id='servicesDropdown' class='dropdown-content'>
