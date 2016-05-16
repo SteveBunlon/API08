@@ -1,0 +1,51 @@
+<div id="newUserModal" class="modal">
+    <div class="modal-content">
+        <h3>Nouvel utilisateur</h3>
+        <span class="red-text" ng-if="errConnexionMessage">{{errConnexionMessage}}</span>
+        <form name="newUserForm" novalidate>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="email" ng-model="mail" name="email" type="email" required class="validate">
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="password" type="text" class="validate" ng-model="password" name="password" required>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="lastName" ng-model="lastName" name="lastName" type="text" required>
+                    <label for="lastName">Nom</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="firstName" ng-model="firstName" name="firstName" type="text" required>
+                    <label for="firstName">Prénom</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select class="" ng-model="accountType" material-select watch>
+                        <option ng-repeat="value in roles">{{value}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <input type="submit" class="btn" ng-click="newUserForm.$valid && createUser()" value="créer" ng-class="{disabled:newUserForm.$invalid==true}"/>
+                <a href class="modal-action modal-close btn">Annuler</a>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+    </div>
+</div>
+<div ng-repeat='u in users track by $index'>
+    {{u.mail}}
+</div>
+<div class="container">
+    <a class="btn-floating btn-large waves-effect waves-light red" ng-click="createExterneUser()" modal href="#newUserModal"><i class="material-icons">add</i></a>
+</div>

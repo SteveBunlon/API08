@@ -7,12 +7,12 @@ var commandSchema = new mongoose.Schema({
 
 var userSchema = new mongoose.Schema({
     mail:  {type: String, required: true, unique: true },
-    accountType: {type: String, required: true, default: "user"},
+    accountType: {type: String, enum:["admin", "membre", "user"], required: true, default: "user"},
     lastname: {type:String, required: true},
     firstname: {type:String, required: true},
     commands: [commandSchema],
     password: {type:String},
-    from: {type:String, enum:["cas", "ext"],required:true},
+    from: {type:String, enum:["cas", "ext"],required:true, default:"ext"},
     casUsername: {type:String}
 });
 

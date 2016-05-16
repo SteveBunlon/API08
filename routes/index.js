@@ -91,6 +91,35 @@ router.get('/cas', function(req, res, next) {
     });
 });
 
+router.post('/api/users', function(req, res, next){
+    user.find({}, function(err, docs){
+        if(err)
+            res.sendStatus(500);
+        else
+            res.json(JSON.stringify(docs));
+    })
+})
+
+router.post('/api/users/new', function(req, res, next){
+    var mail = req.body.mail || null,
+        lastName = req.body.lastName || null,
+        firstName = req.body.firstName || null,
+        password = req.body.password || null,
+        accountType = req.body.accountType || null;
+
+    if(!mail || !lastName || !firstName || !password || !accountType)
+        res.sendStatus(403);
+    else{
+        var newUser = new user({mail:mail, lastname:lastName, firstname:firstName, password:password, accountType:accountType});
+        newUser.save(function(err){
+            if(err)
+                res.status(500).send(err);
+            else
+                res.sendStatus(200);
+        })
+    }
+})
+
 router.post('/api/caslogin', function(req, res, next){
     console.log("chien");
     var mail = req.body.username || '';
@@ -127,7 +156,7 @@ router.post('/api/login', function(req, res, next) {
         password = req.body.password || '';
 
     if (mail == '' || password == '') {
-        return res.sendStatus(401);
+        return res.status(401).send("Missing parameters");
     }
     user.findOne({
         mail: mail,

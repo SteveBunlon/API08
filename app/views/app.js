@@ -10,7 +10,8 @@ angular.module('polarApplication', ["polarApplication.services",
     "polarApplication.annalsOrder",
     "polarApplication.team",
     "polarApplication.commands",
-    'ui.materialize'])
+    'ui.materialize',
+    'polarApplication.users'])
 
 .config(function ($stateProvider){
     
@@ -51,6 +52,11 @@ angular.module('polarApplication', ["polarApplication.services",
 
     $(".button-collapse").sideNav();
     $scope.state = $state;
+
+    $scope.goUsers = function(){
+        if($scope.user && $scope.user.accountType == "admin")
+            $state.go("app.users");
+    }
 
     $scope.goHome = function(){
         $state.go("app.home");
