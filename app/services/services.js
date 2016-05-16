@@ -29,6 +29,7 @@ angular.module('polarApplication.services', [])
                 $state.go("app.home",{},{reload:true});
             },
             loginFromCas: function(username){
+                console.log(apiUrl.getApiUrl() + "/caslogin");
                 return $http.post(apiUrl.getApiUrl() + "/caslogin", {username:username});
             }
         }
