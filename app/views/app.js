@@ -87,6 +87,7 @@ angular.module('polarApplication', ["polarApplication.services",
 
     $scope.logout = function(){
         loginService.logout();
+        $('.button-collapse').sideNav('hide');
         $state.reload();
     }
 
