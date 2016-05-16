@@ -33,11 +33,11 @@ router.get('/cas', function(req, res, next) {
     request("https://cas.utc.fr/cas/serviceValidate?service=http://51.255.169.85:3001/cas&ticket="+req.query.ticket, function(error, response, body){
         console.log(body);
         if(error)
-            res.status(500).send();
+            res.status(500).send("Request to UTC pb");
         //Parse the user received
         parseString(body, function (err, result) {
             if(err)
-                res.status(500).send();
+                res.status(500).send("Error while parsing xml");
             var usernameFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:user"][0],
                 toDisplayFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:cn"][0],
                 mailFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:mail"][0];
@@ -45,7 +45,7 @@ router.get('/cas', function(req, res, next) {
             //looking if the user exists
             user.find({casUsername:usernameFromXml}, function(err, data){
                 if(err)
-                    res.status(500).send();
+                    res.status(500).send("Err while looking for cas user in base");
                 else
                 //if it doesn't exist we create it
                 if(data == undefined || data == "" || data == null){
@@ -55,7 +55,7 @@ router.get('/cas', function(req, res, next) {
                     newUser.save(function(err){
                         if(err){
                             console.log(err);
-                            res.status(500).send();
+                            res.status(500).send("error while saving the new cas user");
                         }
                         else
                             console.log("user created successfuly");
