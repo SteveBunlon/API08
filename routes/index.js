@@ -29,7 +29,7 @@ router.get('/cas', function(req, res, next) {
                 res.status(500).send();
             var usernameFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:user"],
                 toDisplayFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:cn"];
-            console.log(toDisplayFromXml);
+            console.log(toDisplayFromXml[0]);
             //looking if the user exists
             user.find({mail:usernameFromXml}, function(err, data){
                 if(err)
