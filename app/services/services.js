@@ -16,6 +16,11 @@ angular.module('polarApplication.services', [])
         return {
             getProducts:function(){
                 return $http.post(apiUrl.getApiUrl() + "/products",{});
+            },
+            
+            saveProduct:function(name,price,onSale){
+                console.log(onSale);
+                return $http.post(apiUrl.getApiUrl() + "/product",{name:name, price:price, onSale:onSale})
             }
         }
     }])

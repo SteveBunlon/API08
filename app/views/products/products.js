@@ -16,20 +16,35 @@ angular.module('polarApplication.products', ["ui.router"])
 .controller("productsCtrl",["productService","$scope","$state", "$stateParams","$http","$timeout", function (productService,$scope, $state, $stateParams, $http, $timeout){
 
     productService.getProducts().then(function($dataObject){
-        console.log(JSON.parse($dataObject.data));
         $scope.products = JSON.parse($dataObject.data);
     }, function($dataObject){
         console.log("no products");
     });
 
-    $scope.editProduct = function(name, price){
-        console.log(name);
+    $scope.editProduct = function(name, price, onSale){
         $scope.name = name;
         $scope.price = price;
+        $scope.onSale = onSale;
         $timeout(function() {
             $('#updateProductModal').openModal();
         })
     };
+
+
+    $scope.createProduct = function(){
+        $timeout(function() {
+            $('#updateProductModal').openModal();
+        })
+    }
+
+    $scope.saveProduct = function(){
+        productService.saveProduct($scope.name,$scope.price,$scope.onSale).then(function(){
+            console.log("saved");
+            $state.reload();
+        },function(err){
+            console.error(err);
+        })
+    }
 
     $timeout(function() {
         Materialize.updateTextFields();

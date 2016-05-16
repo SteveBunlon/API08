@@ -24,6 +24,26 @@ router.post('/api/products', function(req, res, next){
     })
 })
 
+router.post('/api/product', function(req, res, next){
+    var productName = req.body.name || null,
+        productPrice = req.body.price || null,
+        productOnSale = req.body.onSale;
+    if (!productName || !productPrice) {
+        res.status(401).send("Le nom du produit est obligatoire");
+    }
+    product.findOne({ name: productName }, function (err, doc){
+        if(err) {
+            res.sendStatus(500);
+        }
+        else {
+            doc.price = productPrice;
+            doc.onSale = productOnSale;
+            doc.save();
+            res.sendStatus(200);
+        }
+    });
+})
+
 
 
 
