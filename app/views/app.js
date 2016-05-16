@@ -20,9 +20,17 @@ angular.module('polarApplication', ["polarApplication.services",
     });
 })
 
-.constant("API_URL", "http://localhost:3000")
+.constant("API_URL", "http://localhost:3001")
 
-.run(function ($state, $http) {
+.run(function ($state, $http, loginService) {
+    //we connect the user if the CAS returned us a student
+    if($('#username')[0].attributes.value.value && $('#toDisplay')[0].attributes.value.value){
+        loginService.loginFromCas().then(function($dataObject){
+            AuthenticationService.createSession(JSON.parse($dataObject.data.user), $dataObject.data.token);
+        }, function($dataObject){
+            console.log("error while receiving the token for cas user");
+        });
+    }
     $state.go("app.home");
  })
 

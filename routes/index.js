@@ -11,7 +11,7 @@ var express = require('express'),
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render(path.join(__dirname + '/../app/index.jade'), {
-      username : "",
+      username : "test",
       toDisplay : "",
     });
 });
@@ -21,19 +21,41 @@ router.get('/', function(req, res, next) {
 router.get('/cas', function(req, res, next) {
     console.log(req.query.ticket);
     request("https://cas.utc.fr/cas/serviceValidate?service=http://51.255.169.85:3001/cas&ticket="+req.query.ticket, function(error, response, body){
-        console.log(body);
+        if(err)
+            res.status(500).send();
+        //Parse the user received
         parseString(body, function (err, result) {
-            console.log("hello");
-            console.log(result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:user"]);
-            console.log(result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:cn"]);
+            if(err)
+                res.status(500).send();
+            var usernameFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:user"],
+                toDisplayFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:cn"];
+            //looking if the user exists
+            user.find({mail:usernameFromXml}, function(err, data){
+                if(err)
+                    res.status(500).send();
+                else
+                    //if it doesn't exist we create it
+                    if(data == undefined || data == "" || data == null){
+                        var lastName = toDisplayFromXml.split(" ")[1],
+                            firstName = toDisplayFromXml.split(" ")[0];
+                        var newUser = new user({mail:usernameFromXml, lastName:lastName, firstName:firstName, from:"cas"});
+                        newUser.save(function(err){
+                            if(err){
+                                console.log(err);
+                                res.status(500).send();
+                            }
+                            else
+                                console.log("user created successfuly");
+                        })
+                    }
+            })
+            //sending the info saying that we need to connect a CAS user
             res.render(path.join(__dirname + '/../app/index.jade'), {
-                username: result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:user"],
-                toDisplay: result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:cn"]}
+                usernameFromXml: usernameFromXml,
+                toDisplayFromXml: toDisplayFromXml}
             );
         });
     });
-    //https://assos.utc.fr/ginger/v1/bunlonst?key=yE27aq9cV2Xdm79j85eNCEg3TJaEBZ8v
-    //res.sendFile(path.join(__dirname + '/../app/index.html'));
 });
 
 
@@ -46,6 +68,36 @@ router.post('/api/products', function(req, res, next){
     })
 })
 
+router.post('.api/casLogin', function(req, res, next){
+    var mail = req.body.mail || '';
+
+    if (mail == '') {
+        return res.sendStatus(401);
+    }
+    user.findOne({
+        mail: mail,
+        from: "cas"
+    }, function(err, user) {
+        if (err) {
+            console.log(err);
+            return res.sendStatus(401);
+        } else {
+            if(user){
+                var token = jwt.sign(user, "vnqfdmvqfnvqmernvmeqnvmqrehqùebnqZ43565TGV2R24GVFVDdsvQ%vmdsfbqf", {
+                    expiresIn:    3600// seconds, 600 minutes, 1heures.
+                });
+                return res.json({
+                    token: token,
+                    user: JSON.stringify(user)
+                });
+            }else{
+                console.log("no users found");
+                res.sendStatus(401);
+            }
+        }
+    })
+})
+
 router.post('/api/login', function(req, res, next) {
     var mail = req.body.mail || '',
         password = req.body.password || '';
@@ -54,7 +106,8 @@ router.post('/api/login', function(req, res, next) {
         return res.sendStatus(401);
     }
     user.findOne({
-        mail: mail
+        mail: mail,
+        from: "ext"
     }, function(err, user) {
         if (err) {
             console.log(err);
@@ -63,7 +116,7 @@ router.post('/api/login', function(req, res, next) {
             if(user){
                 if(user.password.localeCompare(password) == 0) {
                     var token = jwt.sign(user, "vnqfdmvqfnvqmernvmeqnvmqrehqùebnqZ43565TGV2R24GVFVDdsvQ%vmdsfbqf", {
-                        //expiresIn:    //36000 seconds, 600 minutes, 10heures.
+                        expiresIn:    3600//seconds, 600 minutes, 10heures.
                     });
                     user.password = "";
                     return res.json({
