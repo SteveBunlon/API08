@@ -10,7 +10,10 @@ var express = require('express'),
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.sendFile(path.join(__dirname + '/../app/index.html'));
+  res.render(path.join(__dirname + '/../app/index.jade'), {
+      username : "",
+      toDisplay : "",
+    });
 });
 
 
@@ -23,8 +26,11 @@ router.get('/cas', function(req, res, next) {
             console.log("hello");
             console.log(result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:user"]);
             console.log(result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:cn"]);
+            res.render(path.join(__dirname + '/../app/index.jade'), {
+                username: result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:user"],
+                toDisplay: result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:cn"]}
+            );
         });
-        res.status(200).send();
     });
     //https://assos.utc.fr/ginger/v1/bunlonst?key=yE27aq9cV2Xdm79j85eNCEg3TJaEBZ8v
     //res.sendFile(path.join(__dirname + '/../app/index.html'));
