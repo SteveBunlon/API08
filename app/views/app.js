@@ -22,7 +22,7 @@ angular.module('polarApplication', ["polarApplication.services",
 
 .constant("API_URL", "http://51.255.169.85:3001")
 
-.run(function ($state, $http, loginService) {
+.run(function ($state, $http, loginService, AuthenticationService) {
     //we connect the user if the CAS returned us a student
     if($('#username')[0] && $('#toDisplay')[0] && $('#username')[0].attributes.value &&  $('#toDisplay')[0].attributes.value && $('#username')[0].attributes.value.value &&  $('#toDisplay')[0].attributes.value.value){
         console.log("requested"+$('#username')[0].attributes.value.value);
