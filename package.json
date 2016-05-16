@@ -14,7 +14,9 @@
     "jsonwebtoken": "^6.2.0",
     "mongoose": "^4.4.16",
     "morgan": "~1.6.1",
+    "request": "^2.72.0",
     "sass": "^0.5.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "xml2js": "^0.4.16"
   }
 }

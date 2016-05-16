@@ -77,4 +77,7 @@ app.use(function(err, req, res, next) {
 //DB config
 mongoose.connect("mongodb://127.0.0.1:27017/Polar");
 
+app.set('port', 500);
+app.listen(app.get('port'));
+
 module.exports = app;

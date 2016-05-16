@@ -16,7 +16,7 @@ angular.module('polarApplication.products', ["ui.router"])
 .controller("productsCtrl",["$scope","$state","$http","$timeout", function ($scope, $state, $http, $timeout){
     $timeout(function() {
         angular.element(document).ready(function () {
-            $('ul.tabs').tabs('select_tab', stateParams.productsCategory);
+            $('ul.tabs').tabs('select_tab', $state.params.productsCategory);
         });
     })
 }])

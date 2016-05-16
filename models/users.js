@@ -11,6 +11,7 @@ var userSchema = new mongoose.Schema({
     lastname: {type:String, required: true},
     firstname: {type:String, required: true},
     commands: [commandSchema],
+    password: {type:String, required:true}
 });
 
 // Bcrypt middleware on UserSchema

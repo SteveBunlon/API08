@@ -20,7 +20,7 @@ angular.module('polarApplication.services', [])
             },
             logout: function (){
                 AuthenticationService.endSession();
-                $state.go("app.accueil",{},{reload:true});
+                $state.go("app.home",{},{reload:true});
             }
         }
     }])
