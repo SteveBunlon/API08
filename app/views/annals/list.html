@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+        <div class="s12 col">
+            <form class="forms forms-inline input-field ">
+                <input type="text" class="input-big width-50" id="query" ng-model="query">
+                <label for="query">Filter</label>
+            </form>
+            <ul class="collection">
+                <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="a in annals | filter:query | orderBy:'user.username'">
+                    <a href="" ng-click="modalDetails(u.user)" class="modal-trigger title"><img ng-src="{{u.user.picture.thumbnail}}" alt="" class="circle"> {{u.user.username}}</a>
+                    <p>{{u.user.location.city}}, {{u.user.location.state}}</p>
+                    <a href="#!" class="secondary-content" ng-click="removeUser(u)"><i class="small mdi-action-highlight-remove"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="modalDetails" class="modal bottom-sheet">
+        <div class="modal-content">
+            <div class="row">
+                <div class="l2 col">
+                    <img ng-src="{{user.picture.medium}}" alt="" class="align-right circle">
+                </div>
+                <div class="l10 col">
+                    <h2>{{user.username}}</h2>
+                    <label>Email</label> {{user.email}} <br/>
+                    <label>Password</label> {{user.password}}
+                    <hr>
+                    <label>Phone</label> {{user.phone}} <br/>
+                    <label>Location</label> {{user.location.city}}, {{user.location.state}} <br/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

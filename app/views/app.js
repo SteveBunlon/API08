@@ -5,6 +5,10 @@ angular.module('polarApplication', ["polarApplication.services",
     "polarApplication.service",
     "polarApplication.about",
     "polarApplication.contact",
+    "polarApplication.annalsList",
+    "polarApplication.annalsUpload",
+    "polarApplication.annalsOrder",
+    "polarApplication.team",
     "polarApplication.commands",
     'ui.materialize'])
 
@@ -45,12 +49,29 @@ angular.module('polarApplication', ["polarApplication.services",
         $state.go("app.service");
     }
 
+    $scope.goListAnnals = function(){
+        $state.go("app.annalsList");
+    }
+
+    $scope.goOrderAnnals = function(){
+        $state.go("app.annalsOrder");
+    }
+
+    $scope.goUploadAnnals = function(){
+        $state.go("app.annalsUpload");
+    }
+
+
     $scope.goAbout = function(){
         $state.go("app.about");
     }
 
     $scope.goContact= function(){
         $state.go("app.contact");
+    }
+
+    $scope.goTeam= function(){
+        $state.go("app.team");
     }
 
     $scope.goCommands= function(){

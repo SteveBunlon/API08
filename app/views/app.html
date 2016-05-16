@@ -49,7 +49,7 @@
     </ul>
     <ul id='servicesDropdown' class='dropdown-content'>
         <li><a ng-click="goServices()">Poster</a></li>
-        <li><a ng-click="goServices()">Annales</a></li>
+        <li><a ng-click="goListAnnals()">Annales</a></li>
         <li><a ng-click="goServices()">Billeterie</a></li>
         <li><a ng-click="goServices()">Location</a></li>
         <li><a ng-click="goServices()">Compte asso</a></li>
@@ -70,6 +70,14 @@
         <li><a ng-click="goProducts()">Impressions</a></li>
         <li><a ng-click="goProducts()">Fournitures</a></li>
         <li><a ng-click="goProducts()">Informatique</a></li>
+    </ul>
+    <ul id='contactDropdown' class='dropdown-content'>
+        <li><a ng-click="goContact()">Contact</a></li>
+        <li><a ng-click="goTeam()">Team</a></li>
+    </ul>
+    <ul id='mobileContactDropdown' class='dropdown-content'>
+        <li><a ng-click="goContact()">Contact</a></li>
+        <li><a ng-click="goTeam()">Team</a></li>
     </ul>
     <nav>
         <div class="nav-wrapper">
@@ -92,8 +100,12 @@
                     <i class="material-icons right">arrow_drop_down</i>
                     </a>
                 </li>
-                <li class="{{(state.current.name == 'app.services')?'active':''}}"><a href="#">Services</a></li>
-                <li class="{{(state.current.name == 'app.contact')?'active':''}}" ng-click="goContact()"><a href="#">Contact</a></li>
+                <li>
+                    <a ng-show="true" class='dropdown-button' data-activates='contactDropdown' dropdown>
+                        Contacts
+                        <i class="material-icons right">arrow_drop_down</i>
+                    </a>
+                </li>
                 <li class="{{(state.current.name == 'app.about')?'active':''}}" ng-click="goAbout()"><a href="#">À propos</a></li>
                 <li><a ng-show="!connected" class='dropdown-button' data-activates='connexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a ng-show="connected" class='dropdown-button' data-activates='decoDropdown' dropdown>
