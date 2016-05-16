@@ -33,14 +33,14 @@
         </div>
     </div>
     <ul id='decoMobileDropdown' class='dropdown-content'>
-        <li><a ng-click="logout()">Déconnexion</a></li>
+        <li><a href="https://cas.utc.fr/cas/login?service=http://51.255.169.85:3001/cas">Déconnexion</a></li>
     </ul>
     <ul id='decoDropdown' class='dropdown-content'>
         <li><a ng-click="logout()">Déconnexion</a></li>
     </ul>
     <!--DropDown structure -->
     <ul id='connexionDropdown' class='dropdown-content'>
-        <li><a ng-click="logout()">Utilisateur CAS</a></li>
+        <li><a href="https://cas.utc.fr/cas/login?service=http://51.255.169.85:3001/cas">Utilisateur CAS</a></li>
         <li><a href="#connexionModal" modal>Externe</a></li>
     </ul>
     <ul id='mobilConnexionDropdown' class='dropdown-content'>
@@ -98,7 +98,7 @@
                 <li><a ng-show="!connected" class='dropdown-button' data-activates='connexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a ng-show="connected" class='dropdown-button' data-activates='decoDropdown' dropdown>
                     <i class="material-icons right">arrow_drop_down</i>
-                    {{user.firstname}}{{user.lastname}}
+                    {{user.firstname}} {{user.lastname}}
                 </a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
@@ -110,7 +110,7 @@
                 <li><a ng-show="!connected" class='dropdown-button' data-activates='mobilConnexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a ng-show="connected" class='dropdown-button' data-activates='decoMobileDropdown' dropdown>
                     <i class="material-icons right">arrow_drop_down</i>
-                    {{user.firstname}}{{user.lastname}}
+                    {{user.firstname}} {{user.lastname}}
                 </a></li>
             </ul>
         </div>
@@ -118,7 +118,6 @@
 </header>
 <main>
     <div ui-view></div>
-    <a href="https://cas.utc.fr/cas/login?service=http://51.255.169.85:3001/cas">click me</a>
 </main>
 <footer class="page-footer teal lighten-1">
     <div class="container">
