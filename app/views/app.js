@@ -27,6 +27,7 @@ angular.module('polarApplication', ["polarApplication.services",
     });
 })
 
+//.constant("API_URL", "http://51.255.169.85:3001")
 .constant("API_URL", "http://localhost:3001")
 
 .run(function ($state, $http, loginService, AuthenticationService) {

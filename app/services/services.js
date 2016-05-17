@@ -16,6 +16,14 @@ angular.module('polarApplication.services', ["ngFileUpload"])
         return {
             getProducts:function(){
                 return $http.post(apiUrl.getApiUrl() + "/products",{});
+            },
+            
+            saveProduct:function(name,price,onSale){
+                return $http.post(apiUrl.getApiUrl() + "/product",{name:name, price:price, onSale:onSale})
+            },
+
+            createProduct:function(name,category,price,onSale){
+                return $http.post(apiUrl.getApiUrl()+ "/products/new", {name:name, category:category, price:price, onSale:onSale})
             }
         }
     }])
