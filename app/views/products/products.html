@@ -1,9 +1,9 @@
 <div class="row" >
     <div class="col s12">
         <ul class="tabs" tabs>
-            <li class="tab col s3"><a href="#impressionTab">Impressions</a></li>
-            <li class="tab col s3"><a href="#furnitureTab">Fournitures</a></li>
-            <li class="tab col s3"><a href="#ITProvisionTab">Informatique</a></li>
+            <li class="tab col s3 l2"><a href="#impressionTab">Impressions</a></li>
+            <li class="tab col s3 l2"><a href="#furnitureTab">Fournitures</a></li>
+            <li class="tab col s3 l2"><a href="#ITProvisionTab">Informatique</a></li>
         </ul>
     </div>
     <div id="impressionTab" class="col s12">
@@ -12,27 +12,18 @@
             <div class="s10 offset-s1 col">
                 <div class="row">
                     <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
-                         style="-webkit-animation-duration:300ms"
                          ng-repeat="p in products">
                         <div id="{{p.name}}" class="card hoverable teal lighten-1 white-text" ng-if="p.category == 'impression'">
                             <div class="card-image waves-effect waves-light">
                                 <img ng-click="user.accountType == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
                             </div>
                             <div class="card-content row valign-wrapper" style="height:50px">
-                                <span class="col truncate valign"><h3>{{p.name}}</h3></span>
+                                <span class="col truncate valign"><h4>{{p.name}}</h4></span>
                             </div>
                             <div class="card-action row valign-wrapper small" style="height:30px">
                                 <span class="col valign" ng-if="!p.onSale"><i class="material-icons" alt="non disponible a la vente">block</i><span>Non disponible</span></span>
                                 <span class="col valign" ng-if="p.onSale"><i class="material-icons" alt="en vente">work</i><span>En vente</span></span>
                                 <span class="col s4 valign price right-align"><h5>{{p.price}}€</h5></span>
-                            </div>
-                            <div class="row">
-                                <div class="col m2 hide-on-small-only">&nbsp;</div>
-                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-face-unlock"></i></a></div>
-                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-highlight-remove"></i></a></div>
-                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-alarm-on"></i></a></div>
-                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-account-balance"></i></a></div>
-                                <div class="col m2 .hide-on-small-only">&nbsp;</div>
                             </div>
                         </div><!--/card-->
                     </div>
@@ -46,27 +37,18 @@
             <div class="s10 offset-s1 col">
                 <div class="row">
                     <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
-                         style="-webkit-animation-duration:300ms"
                          ng-repeat="p in products">
                         <div class="card hoverable teal lighten-1 white-text" ng-if="p.category == 'furniture'">
                             <div class="card-image waves-effect waves-light">
                                 <img ng-click="user.accountType == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
                             </div>
                             <div class="card-content row valign-wrapper" style="height:50px">
-                                <span class="col truncate valign"><h3>{{p.name}}</h3></span>
+                                <span class="col truncate valign"><h4>{{p.name}}</h4></span>
                             </div>
                             <div class="card-action row valign-wrapper small" style="height:30px">
                                 <span class="col valign" ng-if="!p.onSale"><i class="material-icons" alt="non disponible a la vente">block</i><span>Non disponible</span></span>
                                 <span class="col valign" ng-if="p.onSale"><i class="material-icons" alt="en vente">work</i><span>En vente</span></span>
                                 <span class="col s4 valign price right-align"><h5>{{p.price}}€</h5></span>
-                            </div>
-                            <div class="row">
-                                <div class="col m2 hide-on-small-only">&nbsp;</div>
-                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-face-unlock"></i></a></div>
-                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-highlight-remove"></i></a></div>
-                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-alarm-on"></i></a></div>
-                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-account-balance"></i></a></div>
-                                <div class="col m2 .hide-on-small-only">&nbsp;</div>
                             </div>
                         </div><!--/card-->
                     </div>
@@ -80,27 +62,18 @@
             <div class="s10 offset-s1 col">
                 <div class="row">
                     <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
-                         style="-webkit-animation-duration:300ms"
                          ng-repeat="p in products">
                         <div class="card hoverable teal lighten-1 white-text" ng-if="p.category == 'ITProvision'">
                             <div class="card-image waves-effect waves-light">
                                 <img ng-click="user.accountType == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
                             </div>
                             <div class="card-content row valign-wrapper" style="height:50px">
-                                <span class="col truncate valign"><h3>{{p.name}}</h3></span>
+                                <span class="col truncate valign"><h4>{{p.name}}</h4></span>
                             </div>
                             <div class="card-action row valign-wrapper small" style="height:30px">
                                 <span class="col valign" ng-if="!p.onSale"><i class="material-icons" alt="non disponible a la vente">block</i><span>Non disponible</span></span>
                                 <span class="col valign" ng-if="p.onSale"><i class="material-icons" alt="en vente">work</i><span>En vente</span></span>
                                 <span class="col s4 valign price right-align"><h5>{{p.price}}€</h5></span>
-                            </div>
-                            <div class="row">
-                                <div class="col m2 hide-on-small-only">&nbsp;</div>
-                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-face-unlock"></i></a></div>
-                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-highlight-remove"></i></a></div>
-                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-alarm-on"></i></a></div>
-                                <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-account-balance"></i></a></div>
-                                <div class="col m2 .hide-on-small-only">&nbsp;</div>
                             </div>
                         </div>
                     </div><!--/card-->

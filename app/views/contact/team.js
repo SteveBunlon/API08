@@ -13,6 +13,12 @@ angular.module('polarApplication.team', ["ui.router"])
             });
     })
 
-    .controller("teamCtrl",["$scope","$state", function ($scope, $state){
-
+    .controller("teamCtrl",["usersService","$scope","$state", function (usersService,$scope, $state){
+        usersService.getAll().then(function($dataObject){
+            console.log('users');
+            console.log(JSON.parse($dataObject.data))
+;            $scope.users = JSON.parse($dataObject.data);
+        }, function($dataObject){
+            console.log("no users");
+        });
     }])
