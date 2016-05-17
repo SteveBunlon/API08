@@ -1,0 +1,185 @@
+<div class="container">
+    <div class="col s12">
+        <ul class="tabs" tabs>
+            <li class="tab col s3"><a href="#consult">Consulter</a></li>
+            <li class="tab col s3"><a href="#order">Commander</a></li>
+            <li class="tab col s3"><a href="#add">Ajouter</a></li>
+        </ul>
+    </div>
+    <div id="add" class="col s12">
+        <br>
+        <h3>Ajout d'une annale : </h3>
+        <form name="addAnnalForm" novalidate enctype="multipart/form-data">
+            <div class="input-field col m6 s12 l12">
+                <input id="annalName" name="annalName" type="text" class="validate" required ng-model="annalName">
+                <label for="annalName">Nom</label>
+            </div>
+            <br>
+            <label>Type de l'annal</label>
+            <div class="input-field col s12">
+                <input ng-model="annalType" class="with-gap" name="annalType" type="radio" id="median" value="median" checked/>
+                <label for="median">median</label>
+                <input ng-model="annalType" class="with-gap" name="annalType" type="radio" id="partiel" value="partiel"/>
+                <label for="partiel">partiel</label>
+                <input ng-model="annalType" class="with-gap" name="annalType" type="radio" id="final" value="final"/>
+                <label for="final">final</label>
+            </div>
+            <br>
+            <label>Semestre</label>
+            <div class="input-field col s12">
+            <input ng-model="annalSaison" class="with-gap" name="annalSaison" type="radio" id="printemps" value="printemps" checked/>
+            <label for="printemps">Printemps</label>
+            <input ng-model="annalSaison" class="with-gap" name="annalSaison" type="radio" id="automne" value="automne"/>
+            <label for="automne">Automne</label>
+        </div>
+            <br>
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>Fichier</span>
+                    <input type="file" ngf-select="addFile($file, $invalidFile, $event)" accept=".pdf">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" required>
+                </div>
+            </div>
+            <label for="inputCreated">Date</label>
+            <input input-date
+                   type="text"
+                   name="created"
+                   id="inputCreated"
+                   ng-model="annalDate"
+                   container="body"
+                   format="dd/mm/yyyy"
+                   months-full="{{ month }}"
+                   months-short="{{ monthShort }}"
+                   weekdays-full="{{ weekdaysFull }}"
+                   weekdays-short="{{ weekdaysShort }}"
+                   weekdays-letter="{{ weekdaysLetter }}"
+                   disable="disable"
+                   min="{{ minDate }}"
+                   max="{{ maxDate }}"
+                   today="today"
+                   clear="clear"
+                   close="close"
+                   select-years="15"
+                   on-start="onStart()"
+                   on-render="onRender()"
+                   on-open="onOpen()"
+                   on-close="onClose()"
+                   on-set="onSet()"
+                   on-stop="onStop()"
+                   required/>
+            <div class="input-field col m6 s12 l12">
+                <input id="annalPages" name="annalPages" type="number" min="1" class="validate" required ng-model="annalPages">
+                <label for="annalPages">Pages</label>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="sendAnnal" ng-click="addAnnalForm.$valid && sendAnnal()" ng-class="{disabled:addAnnalForm.$invalid==true}">Envoyer
+                <i class="material-icons right">send</i>
+            </button>
+
+        </form>
+    </div>
+    <div id="consult" class="col s12">
+        <br>
+        <h3>Consultation libre : </h3>
+        <form>
+            <div class="row">
+                <div class="input-field col l7 offset-l1">
+                    <angucomplete id="ex1"
+                                  placeholder="Rechercher une UV"
+                                  pause="50"
+                                  selectedobject="annal"
+                                  localdata="annalLabels"
+                                  searchfields="name"
+                                  titlefield="name"
+                                  minlength="1"
+                                  inputclass="form-control form-control-small"/>
+                </div>
+                <div class="input-field col l1">
+                    <input ng-model="typeFiltre" class="with-gap" name="annalFiltre" type="radio" id="medianFiltre" value="median" checked/>
+                    <label for="medianFiltre">median</label>
+                    <input ng-model="typeFiltre" class="with-gap" name="annalFiltre" type="radio" id="partielFiltre" value="partiel"/>
+                    <label for="partielFiltre">partiel</label>
+                    <input ng-model="typeFiltre" class="with-gap" name="annalFiltre" type="radio" id="finalFiltre" value="final"/>
+                    <label for="finalFiltre">final</label>
+                </div>
+                <div class="input-field col l1">
+                    <input ng-model="saisonFiltre" class="with-gap" name="saisonFiltre" type="radio" id="printempsFiltre" value="printemps" checked/>
+                    <label for="printempsFiltre">Printemps</label>
+                    <input ng-model="saisonFiltre" class="with-gap" name="saisonFiltre" type="radio" id="automneFiltre" value="automne"/>
+                    <label for="automneFiltre">Automne</label>
+                </div>
+            </div>
+        </form>
+        <br>
+        <table class="bordered highlight centered">
+            <thead>
+                <tr>
+                    <th data-field="name">Nom UV</th>
+                    <th data-field="year">Année</th>
+                    <th data-field="type">Type</th>
+                    <th data-field="saison">Semestre</th>
+                    <th data-field="pages">Pages</th>
+                    <th data-field="download">Télécharger</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="a in annals | filter:{name:annal.title,type:typeFiltre,saison:saisonFiltre}">
+                    <td>{{a.name}}</td>
+                    <td>{{a.date | limitTo : 4 : 6}}</td>
+                    <td>{{a.type}}</td>
+                    <td>{{a.saison}}</td>
+                    <td>{{a.nbPage}}</td>
+                    <td><a href="{{a.link}}" target="_blank"><i class="material-icons">file_download</i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="order" class="col s12">
+        <br>
+        <div class="row">
+            <form novalidate name="annalsCommandForm" class="col l8">
+                <h3>Annales : </h3>
+                <div class="container">
+                    {{annalsCommand}}
+                    <div class="row" ng-repeat="ac in annalsCommand track by $index">
+                        <div class="input-field col s12 l3">
+                            <angucomplete id=""
+                                          placeholder="Rechercher une UV"
+                                          pause="50"
+                                          selectedobject="annalsCommand[$index].name"
+                                          localdata="annalLabels"
+                                          searchfields="name"
+                                          titlefield="name"
+                                          minlength="1"
+                                          inputclass="form-control form-control-small"/>
+                        </div>
+                        <div class="input-field col s12 l3">
+                            <select class="" ng-model="annalsCommand[$index].type" material-select watch>
+                                <option disabled selected>Type</option>
+                                <option ng-repeat="value in typeSelect">{{value}}</option>
+                            </select>
+                        </div>
+                        <div class="input-field col s12 l3">
+                            <select class="" ng-model="annalsCommand[$index].saison" material-select watch>
+                                <option ng-repeat="value in saisonSelect">{{value}}</option>
+                            </select>
+                        </div>
+                        <div class="input-field col l1">
+                            <a href="#" ng-click="delete($index)"><i class="material-icons">clear</i></a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="col s4">
+                <h3>Devis : </h3>
+                <div class="container">
+                    <p>Nombre de page : </p>
+                    <p>Prix : </p>
+                    <div class="btn right" ng-click="validerCommande()">Valider</div>
+                </div>
+            </div>
+        </div>
+        <div class="btn" ng-click="add()"><i class="material-icons">add</i></div>
+    </div>
+</div>
