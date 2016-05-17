@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 
 var commandSchema = new mongoose.Schema({
     date: {type:Date, required: true},
-    annalNumber: {type:String, required: true}
+    type: {type:String, required: true},
+    p:[]
 })
 
 var userSchema = new mongoose.Schema({

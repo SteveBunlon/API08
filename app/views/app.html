@@ -34,9 +34,11 @@
     </div>
     <ul id='decoMobileDropdown' class='dropdown-content'>
         <li><a ng-click="logout()">Déconnexion</a></li>
+        <li><a ng-click="commands()">Mes commandes</a></li>
     </ul>
     <ul id='decoDropdown' class='dropdown-content'>
         <li><a ng-click="logout()">Déconnexion</a></li>
+        <li><a ng-click="commands()">Mes commandes</a></li>
     </ul>
     <!--DropDown structure -->
     <ul id='connexionDropdown' class='dropdown-content'>
@@ -49,7 +51,7 @@
     </ul>
     <ul id='servicesDropdown' class='dropdown-content'>
         <li><a ng-click="goServices()">Poster</a></li>
-        <li><a ng-click="goListAnnals()">Annales</a></li>
+        <li><a ng-click="goAnnals()">Annales</a></li>
         <li><a ng-click="goServices()">Billeterie</a></li>
         <li><a ng-click="goServices()">Location</a></li>
         <li><a ng-click="goServices()">Compte asso</a></li>
@@ -131,7 +133,7 @@
     </nav>
 </header>
 <main>
-    <div ui-view></div>
+    <div style="min-height:743px;" ui-view></div>
 </main>
 <footer class="page-footer teal lighten-1">
     <div class="container">

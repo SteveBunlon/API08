@@ -1,28 +1,69 @@
-<div class="row">
-    <ul class="collapsible popout l8 offset-l2" data-collapsible="expandable">
-        <li>
-            <div class="collapsible-header active"><i class="material-icons">filter_drama</i>Posters</div>
-            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-        <li>
-            <div class="collapsible-header"><i class="material-icons">place</i>Annales</div>
-            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-        <li>
-            <div class="collapsible-header"><i class="material-icons">whatshot</i>Locations</div>
-            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-        <li>
-            <div class="collapsible-header"><i class="material-icons">whatshot</i>Manuels</div>
-            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-        <li>
-            <div class="collapsible-header"><i class="material-icons">whatshot</i>Billets</div>
-            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-        <li>
-            <div class="collapsible-header"><i class="material-icons">whatshot</i>Plasitifications</div>
-            <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-        </li>
-    </ul>
+<div class="container">
+    <br>
+    <h3>Mes commandes</h3>
+    <br>
+    {{annalesUserCommandes}}
+    <div class="row">
+        <ul class="collapsible popout l8 offset-l2" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header active"><i class="material-icons">filter_drama</i>Posters</div>
+                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">place</i>Annales</div>
+                <div class="collapsible-body">
+                    <div class="container">
+                        <div ng-repeat="command in annalesUserCommandes">
+                            <h5>
+                                Commande du : {{command.date | date:'dd/MM/yyyy'}}
+                            </h5>
+                            <table class="centered highlight">
+                                <thead>
+                                    <tr>
+                                        <th data-field="name">Nom UV</th>
+                                        <th data-field="type">Type</th>
+                                        <th data-field="saison">Semestre</th>
+                                        <th data-field="year">Année</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="couille in command.p">
+                                        <td>
+                                            {{couille.name}}
+                                        </td>
+                                        <td>
+                                            {{couille.name}}
+                                        </td>
+                                        <td>
+                                            {{couille.name}}
+                                        </td>
+                                        <td>
+                                            {{couille.name}}
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">whatshot</i>Locations</div>
+                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">whatshot</i>Manuels</div>
+                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">whatshot</i>Billets</div>
+                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">whatshot</i>Plasitifications</div>
+                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+            </li>
+        </ul>
+    </div>
 </div>

@@ -1,12 +1,26 @@
 var express = require('express'),
 	router = express.Router(),
+    multer = require('multer'),
 	path = require('path'),
     user = require('../models/users.js'),
     jwt =  require('jsonwebtoken'),
     request = require('request'),
     parseString = require('xml2js').parseString,
+    annal = require('../models/annals.js'),
     product = require('../models/products.js');
 
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function(req, file, cb) {
+        cb(null, Date.now() + '_' + file.originalname)
+    }
+})
+
+var upload = multer({
+    storage: storage
+});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -29,9 +43,7 @@ router.post('/api/products', function(req, res, next){
 
 
 router.get('/cas', function(req, res, next) {
-    console.log(req.query.ticket);
     request("https://cas.utc.fr/cas/serviceValidate?service=http://51.255.169.85:3001/cas&ticket="+req.query.ticket, function(error, response, body){
-        console.log(body);
         if(error)
             res.status(500).send("Request to UTC pb");
         //Parse the user received
@@ -41,7 +53,6 @@ router.get('/cas', function(req, res, next) {
             var usernameFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:user"][0],
                 toDisplayFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:cn"][0],
                 mailFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:mail"][0];
-            console.log(usernameFromXml);
             //looking if the user exists
             user.find({casUsername:usernameFromXml}, function(err, data){
                 if(err)
@@ -92,8 +103,10 @@ router.post('/api/users/new', function(req, res, next){
     else{
         var newUser = new user({mail:mail, lastname:lastName, firstname:firstName, password:password, accountType:accountType});
         newUser.save(function(err){
-            if(err)
+            if(err){
+                console.log(err);
                 res.status(500).send(err);
+            }
             else
                 res.sendStatus(200);
         })
@@ -101,7 +114,6 @@ router.post('/api/users/new', function(req, res, next){
 })
 
 router.post('/api/caslogin', function(req, res, next){
-    console.log("chien");
     var mail = req.body.username || '';
 
     if (mail == '') {
@@ -166,5 +178,82 @@ router.post('/api/login', function(req, res, next) {
         }
     })
 });
+
+router.post('/api/annals/add',upload.single('file'), function (req, res, next) {
+    var pages = req.body.pages || null,
+        name = req.body.name || null,
+        type = req.body.type || null,
+        saison = req.body.saison || null,
+        date = req.body.date || null,
+        file = req.file;
+    if(!pages || !name || !type || !saison || !date || !file){
+        res.sendStatus(500);
+    }
+    else{
+        var newAnnal = new annal({name:name, saison:saison, type:type, nbPage:pages, link:file.path,date:date});
+        newAnnal.save(function(err){
+            if(err){
+                console.log(err);
+                return;
+            }
+            else
+                return res.sendStatus(200);
+        })
+    }
+})
+
+router.post('/api/annals', function(req, res, next){
+    annal.find({}, function(err, annals){
+        if(err)
+            res.sendStatus(500);
+        else
+            res.json(JSON.stringify(annals));
+    })
+})
+
+router.post('/api/createCommand', function(req, res, next){
+    var mail = req.body.mail,
+        commands = JSON.parse(req.body.commands);
+
+    if(!mail || !commands)
+        res.sendStatus(500);
+    else{
+        console.log("gotcha");
+        user.findOne({mail:mail}, function(err, nUser){
+            if(err)
+                res.sendStatus(500)
+            else{
+                console.log(commands);
+                nUser.commands.push({date:new Date(),type:"annales",p:commands});
+                console.log("chien");
+                nUser.save(function(err){
+                    if(err){
+                        console.log(err);
+                        res.status(500).send(err);
+                    }
+                    else
+                        res.sendStatus(200);
+                });
+            }
+        })
+    }
+})
+
+router.post("/api/userCommands", function(req, res, next){
+    var mail = req.body.user || null;
+    console.log(mail);
+    if(!mail)
+        res.sendStatus(401);
+    else{
+        user.findOne({mail:mail}, function(err, fuser){
+            if(err){
+                res.sendStatus(500);
+                console.log(err)
+            }
+            else
+                res.json(fuser.commands);
+        })
+    }
+})
 
 module.exports = router;

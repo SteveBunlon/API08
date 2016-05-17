@@ -11,7 +11,9 @@ angular.module('polarApplication', ["polarApplication.services",
     "polarApplication.team",
     "polarApplication.commands",
     'ui.materialize',
-    'polarApplication.users'])
+    'polarApplication.users',
+    'polarApplication.annals',
+    'angucomplete'])
 
 .config(function ($stateProvider){
     
@@ -46,6 +48,10 @@ angular.module('polarApplication', ["polarApplication.services",
 .controller("appCtrl",["$window","$scope","$state","loginService","AuthenticationService", function ($window,$scope, $state, loginService, AuthenticationService){
     $scope.connected = AuthenticationService.isLogged();
 
+    $scope.commands = function(){
+        $state.go('app.commands');
+    }
+
     if($scope.connected)
         $scope.user = AuthenticationService.getUserLogged();
 
@@ -70,8 +76,8 @@ angular.module('polarApplication', ["polarApplication.services",
         $state.go("app.service");
     }
 
-    $scope.goListAnnals = function(){
-        $state.go("app.annalsList");
+    $scope.goAnnals = function(){
+        $state.go("app.annals");
     }
 
     $scope.goOrderAnnals = function(){

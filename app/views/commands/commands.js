@@ -13,6 +13,18 @@ angular.module('polarApplication.commands', ["ui.router"])
             });
     })
 
-    .controller("commandsCtrl",["$scope","$state","$http", function ($scope, $state, $http){
+    .controller("commandsCtrl",["userCommands","$scope","$state","$http", function (userCommands,$scope, $state, $http){
+        $scope.annalesUserCommandes = [];
+        userCommands.get().then(function($dataObject){
+            $scope.userCommands = $dataObject.data;
+            $scope.userCommands.forEach(function(c){
+                if(c.type === "annales")
+                    $scope.annalesUserCommandes.push(c);
+            })
+
+            console.log($scope.annalesUserCommandes[0].p);
+        },function($dataObject){
+            console.log("err whule loading user commands");
+        })
 
     }])

@@ -2,7 +2,7 @@
  * Created by sbunlon on 14/05/2016.
  */
 
-angular.module('polarApplication.services', [])
+angular.module('polarApplication.services', ["ngFileUpload"])
 
     .factory('apiUrl', function (API_URL){
         return {
@@ -41,6 +41,28 @@ angular.module('polarApplication.services', [])
             },
         }
     }])
+    .factory('commandAnnalService', ["apiUrl",'$http','AuthenticationService',function(apiUrl,$http, AuthenticationService){
+        return {
+            createCommand:function(commands){
+                return $http.post(apiUrl.getApiUrl()+"/createCommand", {mail:AuthenticationService.getUserLogged().mail, commands:JSON.stringify(commands)});
+            }
+        }
+    }])
+    .factory('annalService', ['Upload','$http', 'apiUrl', function (Upload, $http, apiUrl){
+        return {
+            getAll:function (){
+                return $http.post(apiUrl.getApiUrl() + "/annals",{});
+            },
+            add:function(type, name, file, saison, date, pages){
+                console.log(file);
+                return Upload.upload({
+                    url:apiUrl.getApiUrl()+"/annals/add",
+                    arrayKey: '',
+                    data:{'file':file,'name':name, 'type':type, 'saison':saison,'date':date, 'pages':pages}
+                })
+            }
+        }
+    }])
     .factory('usersService', ['$http', 'apiUrl', function ($http, apiUrl){
         return {
             getAll:function(){
@@ -48,6 +70,13 @@ angular.module('polarApplication.services', [])
             },
             new:function(lastName, firstName, mail, password, accountType){
                 return $http.post(apiUrl.getApiUrl() + "/users/new", {lastName:lastName, firstName:firstName, mail:mail,password:password, accountType:accountType});
+            }
+        }
+    }])
+    .factory('userCommands', ['apiUrl','$http','AuthenticationService', function(apiUrl,$http, AuthenticationService){
+        return {
+            get:function(){
+                return $http.post(apiUrl.getApiUrl()+"/userCommands", {user:AuthenticationService.getUserLogged().mail});
             }
         }
     }])
