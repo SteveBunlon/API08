@@ -14,9 +14,9 @@
                     <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
                          style="-webkit-animation-duration:300ms"
                          ng-repeat="p in products">
-                        <div class="card teal lighten-1" ng-if="p.category == 'impression'">
+                        <div id="{{p.name}}" class="card teal lighten-1" ng-if="p.category == 'impression'" scroll-fire="toast(p.name)" offset="500">
                             <div class="card-image waves-effect waves-light">
-                                <img ng-click="editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
+                                <img ng-click="user.accountType == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
                             </div>
                             <div class="card-content valign-wrapper">
                                 <span class="col 3 truncate valign"><h5>{{p.name}}</h5></span>
@@ -48,7 +48,7 @@
                          ng-repeat="p in products">
                         <div class="card teal lighten-1" ng-if="p.category == 'furniture'">
                             <div class="card-image waves-effect waves-light">
-                                <img ng-click="editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
+                                <img ng-click="user.accountType == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
                             </div>
                             <div class="card-content valign-wrapper">
                                 <span class="col 3 truncate valign"><h5>{{p.name}}</h5></span>
@@ -80,7 +80,7 @@
                          ng-repeat="p in products">
                         <div class="card teal lighten-1" ng-if="p.category == 'ITProvision'">
                             <div class="card-image waves-effect waves-light">
-                                <img ng-click=" user.role == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
+                                <img ng-click="user.accountType == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
                             </div>
                             <div class="card-content valign-wrapper">
                                 <span class="col 3 truncate valign"><h5>{{p.name}}</h5></span>
@@ -104,13 +104,13 @@
 </div>
 </div>
 
-<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red" href="#createProductModal" modal>
+<div class="fixed-action-btn" ng-if="user.accountType == 'admin'" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red modal-trigger modal-close" href="#createProductModal" modal>
         <i class="large material-icons">add</i>
     </a>
 </div>
 
-<div id="createProductModal" class="modal">
+<div id="createProductModal" class="modal" >
     <form name="newProductForm" novalidate>
         <div class="modal-content">
             <h4>Création d'un produit</h4>
@@ -153,7 +153,7 @@
 </div>
 
 
-<div id="updateProductModal" class="modal">
+<div id="updateProductModal" class="modal" oncancel="reset()">
     <form id="editProductForm">
         <div class="modal-content">
             <h4>Edition</h4>
