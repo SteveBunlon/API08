@@ -11,7 +11,7 @@
         <div class="row" >
             <div class="s10 offset-s1 col">
                 <div class="row">
-                    <div ng-if="{{products.length > 0}}" class="col m4 animated fadeInUp"
+                    <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
                          style="-webkit-animation-duration:300ms"
                          ng-repeat="p in products">
                         <div class="card teal lighten-1" ng-if="p.category == 'impression'">
@@ -43,7 +43,7 @@
         <div class="row" >
             <div class="s10 offset-s1 col">
                 <div class="row">
-                    <div ng-if="{{products.length > 0}}" class="col m4 animated fadeInUp"
+                    <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
                          style="-webkit-animation-duration:300ms"
                          ng-repeat="p in products">
                         <div class="card teal lighten-1" ng-if="p.category == 'furniture'">
@@ -75,7 +75,7 @@
         <div class="row" >
             <div class="s10 offset-s1 col">
                 <div class="row">
-                    <div ng-if="{{products.length > 0}}" class="col m4 animated fadeInUp"
+                    <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
                          style="-webkit-animation-duration:300ms"
                          ng-repeat="p in products">
                         <div class="card teal lighten-1" ng-if="p.category == 'ITProvision'">
@@ -102,6 +102,7 @@
         </div>
     </div>
 </div>
+</div>
 
 <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
     <a class="btn-floating btn-large red" href="#createProductModal" modal>
@@ -110,58 +111,69 @@
 </div>
 
 <div id="createProductModal" class="modal">
-    <div class="modal-content">
-        <h4>Création d'un produit</h4>
-        <div class="input-field" >
+    <form name="newProductForm" novalidate>
+        <div class="modal-content">
+            <h4>Création d'un produit</h4>
             <div class="row">
-                <i class="material-icons prefix">person</i>
-                <input ng-model="name" id="icon_createName" type="string" placeholder="Le nom de votre produit" class="validate">
-                <label for="icon_createName"></label>
+                <div class="input-field col s12" >
+                    <i class="material-icons prefix">person</i>
+                    <input ng-model="name" required id="icon_createName" type="string" placeholder="Le nom de votre produit" class="validate">
+                    <label for="icon_createName"></label>
+                </div>
             </div>
             <div class="row">
-                <select class="" ng-model="select.value1" material-select watch>
-                    <option value="" disabled selected>Choisir la catégorie</option>
-                    <option value="impression">Impression</option>
-                    <option value="furniture">Fourniture</option>
-                    <option value="ITProvision">Informatique</option>
-                </select>
+                <div class="input-field col s12" >
+                    <select class="" required ng-model="category" material-select watch>
+                        <option value="" disabled selected>Choisir la catégorie</option>
+                        <option value="impression">Impression</option>
+                        <option value="furniture">Fourniture</option>
+                        <option value="ITProvision">Informatique</option>
+                    </select>
+                </div>
             </div>
             <div class="row">
-                <i class="material-icons prefix">euro_symbol</i>
-                <input ng-model="price" id="icon_createPrice" type="number" placeholder="Saisissez le prix unitaire de votre produit" class="validate">
-                <label for="icon_createPrice"></label>
+                <div class="input-field col s12" >
+                    <i class="material-icons prefix">euro_symbol</i>
+                    <input ng-model="price" required id="icon_createPrice" type="number" placeholder="Saisissez le prix unitaire de votre produit" class="validate">
+                    <label for="icon_createPrice"></label>
+                </div>
             </div>
             <div class="row">
-                <i class="material-icons prefix">block</i>
-                <input ng-model="onSale" id="icon_createOnSale" type="checkbox" checked="{{onSale}}" class="validate">
-                <label for="icon_createOnSale">L'article est-il disponible à la vente</label>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">block</i>
+                    <input ng-model="onSale" id="icon_createOnSale" type="checkbox" checked="{{onSale}}" class="validate">
+                    <label for="icon_createOnSale">L'article est-il disponible à la vente</label>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button ng-click="saveProduct()" class=" modal-action modal-close waves-effect waves-green btn-flat" type="submit">Valider</button>
-    </div>
+        <div class="modal-footer">
+            <button ng-click="newProductForm.$valid && createProduct()" class="modal-action modal-close waves-effect waves-green btn-flat" ng-class="{disabled:newProductForm.$invalid==true}" type="submit">Valider</button>
+        </div>
+    </form>
 </div>
 
 
 <div id="updateProductModal" class="modal">
-    <div class="modal-content">
-        <h4>Edition</h4>
-        <div class="input-field" >
+    <form id="editProductForm">
+        <div class="modal-content">
+            <h4>Edition</h4>
             <div class="row">
-                <i class="material-icons prefix">euro_symbol</i>
-                <input ng-model="price" id="icon_editPrice" type="number" class="validate">
-                <label for="icon_editPrice"></label>
+                <div class="input-field col s12" >
+                    <i class="material-icons prefix">euro_symbol</i>
+                    <input ng-model="price" id="icon_editPrice" required type="number" class="validate">
+                    <label for="icon_editPrice"></label>
+                </div>
             </div>
             <div class="row">
-                <i class="material-icons prefix">block</i>
-                <input ng-model="onSale" id="icon_EditOnSale" type="checkbox" checked="{{onSale}}" class="validate">
-                <label for="icon_EditOnSale"></label>
+                <div class="input-field col s12" >
+                    <i class="material-icons prefix">block</i>
+                    <input ng-model="onSale" id="icon_EditOnSale" required type="checkbox" checked="{{onSale}}" class="validate">
+                    <label for="icon_EditOnSale"></label>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button ng-click="saveProduct()" class=" modal-action modal-close waves-effect waves-green btn-flat" type="submit">Valider</button>
-    </div>
+        <div class="modal-footer">
+            <button ng-click="editProductForm.$valid && saveProduct()" class=" modal-action modal-close waves-effect waves-green btn-flat" ng-class="{disabled:editProductForm.$invalid==true}" type="submit">Valider</button>
+        </div>
+    </form>
 </div>
-

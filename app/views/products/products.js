@@ -32,9 +32,14 @@ angular.module('polarApplication.products', ["ui.router"])
 
 
     $scope.createProduct = function(){
-        $timeout(function() {
-            $('#updateProductModal').openModal();
-        })
+        if($scope.name || $scope.category || $scope.price) {
+            productService.createProduct($scope.name,$scope.category,$scope.price,$scope.onSale).then(function(){
+                console.log("crated");
+                $state.reload();
+            },function(err){
+                console.error(err);
+            });
+        }
     }
 
     $scope.saveProduct = function(){

@@ -43,6 +43,37 @@ router.post('/api/product', function(req, res, next){
         }
     });
 })
+router.post('/api/products/new', function(req, res, next){
+    var productName = req.body.name || null,
+        productCategory = req.body.category || null,
+        productPrice = req.body.price || null,
+        productOnSale = req.body.onSale;
+
+    console.log(productName);
+    console.log(productCategory);
+    console.log(productPrice);
+    if(!productName || !productCategory || !productPrice){
+        res.status(401).send("Des informations obligatoires manquent");
+    }
+    product.findOne({name: productName }, function(err, doc){
+        if(err) {
+            res.sendStatus(500);
+        } else {
+            if(doc) {
+                res.sendStatus(500);
+            } else {
+                var newProduct = new product({ name: productName,
+                    category: productCategory,
+                    price: productPrice,
+                    onSale: productOnSale
+                });
+                newProduct.save();
+                res.sendStatus(200);
+            }
+        }
+    })
+
+})
 
 
 
