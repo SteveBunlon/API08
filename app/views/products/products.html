@@ -14,15 +14,17 @@
                     <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
                          style="-webkit-animation-duration:300ms"
                          ng-repeat="p in products">
-                        <div id="{{p.name}}" class="card teal lighten-1" ng-if="p.category == 'impression'" scroll-fire="toast(p.name)" offset="500">
+                        <div id="{{p.name}}" class="card hoverable teal lighten-1 white-text" ng-if="p.category == 'impression'">
                             <div class="card-image waves-effect waves-light">
                                 <img ng-click="user.accountType == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
                             </div>
-                            <div class="card-content valign-wrapper">
-                                <span class="col 3 truncate valign"><h5>{{p.name}}</h5></span>
-                                <span class="col 4 valign"><h5>{{p.price}}€</h5></span>
-                                <span class="col 5 valign" ng-if="!p.onSale"><i class="material-icons">block</i></span>
-                                <span class="col 5 valign" ng-if="p.onSale"><i class="material-icons">work</i></span>
+                            <div class="card-content row valign-wrapper" style="height:50px">
+                                <span class="col truncate valign"><h3>{{p.name}}</h3></span>
+                            </div>
+                            <div class="card-action row valign-wrapper small" style="height:30px">
+                                <span class="col valign" ng-if="!p.onSale"><i class="material-icons" alt="non disponible a la vente">block</i><span>Non disponible</span></span>
+                                <span class="col valign" ng-if="p.onSale"><i class="material-icons" alt="en vente">work</i><span>En vente</span></span>
+                                <span class="col s4 valign price right-align"><h5>{{p.price}}€</h5></span>
                             </div>
                             <div class="row">
                                 <div class="col m2 hide-on-small-only">&nbsp;</div>
@@ -46,15 +48,17 @@
                     <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
                          style="-webkit-animation-duration:300ms"
                          ng-repeat="p in products">
-                        <div class="card teal lighten-1" ng-if="p.category == 'furniture'">
+                        <div class="card hoverable teal lighten-1 white-text" ng-if="p.category == 'furniture'">
                             <div class="card-image waves-effect waves-light">
                                 <img ng-click="user.accountType == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
                             </div>
-                            <div class="card-content valign-wrapper">
-                                <span class="col 3 truncate valign"><h5>{{p.name}}</h5></span>
-                                <span class="col 4 valign"><h5>{{p.price}}€</h5></span>
-                                <span class="col 5 valign" ng-if="!p.onSale"><i class="material-icons">block</i></span>
-                                <span class="col 5 valign" ng-if="p.onSale"><i class="material-icons">work</i></span>
+                            <div class="card-content row valign-wrapper" style="height:50px">
+                                <span class="col truncate valign"><h3>{{p.name}}</h3></span>
+                            </div>
+                            <div class="card-action row valign-wrapper small" style="height:30px">
+                                <span class="col valign" ng-if="!p.onSale"><i class="material-icons" alt="non disponible a la vente">block</i><span>Non disponible</span></span>
+                                <span class="col valign" ng-if="p.onSale"><i class="material-icons" alt="en vente">work</i><span>En vente</span></span>
+                                <span class="col s4 valign price right-align"><h5>{{p.price}}€</h5></span>
                             </div>
                             <div class="row">
                                 <div class="col m2 hide-on-small-only">&nbsp;</div>
@@ -78,15 +82,17 @@
                     <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
                          style="-webkit-animation-duration:300ms"
                          ng-repeat="p in products">
-                        <div class="card teal lighten-1" ng-if="p.category == 'ITProvision'">
+                        <div class="card hoverable teal lighten-1 white-text" ng-if="p.category == 'ITProvision'">
                             <div class="card-image waves-effect waves-light">
                                 <img ng-click="user.accountType == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
                             </div>
-                            <div class="card-content valign-wrapper">
-                                <span class="col 3 truncate valign"><h5>{{p.name}}</h5></span>
-                                <span class="col 4 valign"><h5>{{p.price}}€</h5></span>
-                                <span class="col 5 valign" ng-if="!p.onSale"><i class="material-icons">block</i></span>
-                                <span class="col 5 valign" ng-if="p.onSale"><i class="material-icons">work</i></span>
+                            <div class="card-content row valign-wrapper" style="height:50px">
+                                <span class="col truncate valign"><h3>{{p.name}}</h3></span>
+                            </div>
+                            <div class="card-action row valign-wrapper small" style="height:30px">
+                                <span class="col valign" ng-if="!p.onSale"><i class="material-icons" alt="non disponible a la vente">block</i><span>Non disponible</span></span>
+                                <span class="col valign" ng-if="p.onSale"><i class="material-icons" alt="en vente">work</i><span>En vente</span></span>
+                                <span class="col s4 valign price right-align"><h5>{{p.price}}€</h5></span>
                             </div>
                             <div class="row">
                                 <div class="col m2 hide-on-small-only">&nbsp;</div>
@@ -96,6 +102,7 @@
                                 <div class="col m2 s6 center-align"><a href=""><i class="white-text small mdi-action-account-balance"></i></a></div>
                                 <div class="col m2 .hide-on-small-only">&nbsp;</div>
                             </div>
+                        </div>
                     </div><!--/card-->
                 </div>
             </div>
@@ -153,8 +160,8 @@
 </div>
 
 
-<div id="updateProductModal" class="modal" oncancel="reset()">
-    <form id="editProductForm">
+<div id="updateProductModal" class="modal">
+    <form name="editProductForm" novalidate>
         <div class="modal-content">
             <h4>Edition</h4>
             <div class="row">
@@ -167,13 +174,13 @@
             <div class="row">
                 <div class="input-field col s12" >
                     <i class="material-icons prefix">block</i>
-                    <input ng-model="onSale" id="icon_EditOnSale" required type="checkbox" checked="{{onSale}}" class="validate">
+                    <input ng-model="onSale" id="icon_EditOnSale" type="checkbox" checked="{{onSale}}" class="validate">
                     <label for="icon_EditOnSale"></label>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button ng-click="editProductForm.$valid && saveProduct()" class=" modal-action modal-close waves-effect waves-green btn-flat" ng-class="{disabled:editProductForm.$invalid==true}" type="submit">Valider</button>
+            <button ng-click="editProductForm.$valid && saveProduct()" class="modal-action modal-close waves-effect waves-green btn" ng-class="{disabled:editProductForm.$invalid==true}" type="submit">Valider</button>
         </div>
     </form>
 </div>

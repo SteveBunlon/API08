@@ -51,18 +51,10 @@ angular.module('polarApplication.products', ["ui.router"])
     $scope.saveProduct = function(){
         productService.saveProduct($scope.name,$scope.price,$scope.onSale).then(function(){
             console.log("saved");
-            $scope.name = '';
-            $scope.price = null;
-            $scope.onSale = true;
             $state.reload();
         },function(err){
             console.error(err);
         })
-    };
-
-    $scope.toast = function(id){
-        console.log("test");
-        Materialize.fadeInImage('#'+id);
     };
 
     $timeout(function() {
