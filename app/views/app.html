@@ -27,9 +27,7 @@
             </form>
         </div>
         <div class="modal-footer">
-            <div style="float:right;margin-right:20px">
-                Vous n'avez pas de compte ?<a class="modal-action modal-close" ng-click="subscribe()"> S'inscrire !</a>
-            </div>
+
         </div>
     </div>
     <ul id='decoMobileDropdown' class='dropdown-content'>
@@ -51,14 +49,14 @@
     </ul>
     <ul id='servicesDropdown' class='dropdown-content'>
         <li><a ng-click="goServices()">Poster</a></li>
-        <li><a ng-click="goAnnals()">Annales</a></li>
+        <li ng-if="user"><a  ng-click="goAnnals()">Annales</a></li>
         <li><a ng-click="goServices()">Billeterie</a></li>
         <li><a ng-click="goServices()">Location</a></li>
         <li><a ng-click="goServices()">Compte asso</a></li>
     </ul>
     <ul id='mobilServicesDropdown' class='dropdown-content'>
         <li><a ng-click="goServices()">Poster</a></li>
-        <li><a ng-click="goServices()">Annales</a></li>
+        <li ng-if="user"><a ng-click="goAnnals()">Annales</a></li>
         <li><a ng-click="goServices()">Billeterie</a></li>
         <li><a ng-click="goServices()">Location</a></li>
         <li><a ng-click="goServices()">Compte asso</a></li>
@@ -133,7 +131,7 @@
     </nav>
 </header>
 <main>
-    <div style="min-height:743px;" ui-view></div>
+    <div style="min-height:789px;" ui-view></div>
 </main>
 <footer class="page-footer teal lighten-1">
     <div class="container">

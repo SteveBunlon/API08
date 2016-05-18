@@ -73,7 +73,7 @@
                 <input id="annalPages" name="annalPages" type="number" min="1" class="validate" required ng-model="annalPages">
                 <label for="annalPages">Pages</label>
             </div>
-            <button class="btn waves-effect waves-light" type="submit" name="sendAnnal" ng-click="addAnnalForm.$valid && sendAnnal()" ng-class="{disabled:addAnnalForm.$invalid==true}">Envoyer
+            <button class="btn waves-effect waves-light right" type="submit" name="sendAnnal" ng-click="addAnnalForm.$valid && sendAnnal()" ng-class="{disabled:addAnnalForm.$invalid==true}">Envoyer
                 <i class="material-icons right">send</i>
             </button>
 
@@ -141,7 +141,6 @@
             <form novalidate name="annalsCommandForm" class="col l8">
                 <h3>Annales : </h3>
                 <div class="container">
-                    {{annalsCommand}}
                     <div class="row" ng-repeat="ac in annalsCommand track by $index">
                         <div class="input-field col s12 l3">
                             <angucomplete id=""
@@ -162,7 +161,14 @@
                         </div>
                         <div class="input-field col s12 l3">
                             <select class="" ng-model="annalsCommand[$index].saison" material-select watch>
+                                <option disabled selected>Semestre</option>
                                 <option ng-repeat="value in saisonSelect">{{value}}</option>
+                            </select>
+                        </div>
+                        <div class="input-field col s12 l2">
+                            <select class="" ng-model="annalsCommand[$index].year" material-select watch>
+                                <option disabled selected>Année</option>
+                                <option ng-repeat="value2 in yearSelect">{{value2}}</option>
                             </select>
                         </div>
                         <div class="input-field col l1">

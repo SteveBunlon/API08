@@ -112,7 +112,7 @@ angular.module('polarApplication', ["polarApplication.services",
                 AuthenticationService.createSession(JSON.parse($dataObject.data.user), $dataObject.data.token);
                 $('#connexionModal').closeModal();
                 $scope.passwordConnexion = $scope.emailConnexion = "";
-                $state.reload();
+                $state.go("app.home",{},{reload:true});
             }, function($dataObject){
                 $scope.errConnexionMessage = "Une erreur s'est produite, veuillez ré-éssayer ou contacter le Polar.";
             })
@@ -122,7 +122,7 @@ angular.module('polarApplication', ["polarApplication.services",
     $scope.logout = function(){
         loginService.logout();
         $('.button-collapse').sideNav('hide');
-        $state.reload();
+        $state.go("app.home",{},{reload:"true"});
     }
 
     $scope.isLogged = function(){

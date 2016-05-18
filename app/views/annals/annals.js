@@ -73,7 +73,7 @@ angular.module('polarApplication.annals', ["ui.router"])
                 a.name = a.name.title;
             })
             commandAnnalService.createCommand($scope.annalsCommand).then(function($dataObjec){
-                alert("u got it bro");
+                $state.go("app.commands");
             },function($dataObject){
                 alert("Un probleme ets survenu !");
             })
@@ -81,7 +81,8 @@ angular.module('polarApplication.annals', ["ui.router"])
 
         $scope.typeSelect = ["partiel", "median", "final"];
         $scope.saisonSelect = ["printemps", "automne"];
-        $scope.annalsCommand = [{name:"API08", type:"median", saison:"printemps"}];
+        $scope.yearSelect = ["2009","2010","2012","2015"];
+        $scope.annalsCommand = [{name:"API08", type:"median", saison:"automne",year:"2009"}];
         var currentTime = new Date();
         $scope.currentTime = currentTime;
         $scope.month = ['Januar', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

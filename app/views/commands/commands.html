@@ -2,17 +2,17 @@
     <br>
     <h3>Mes commandes</h3>
     <br>
-    {{annalesUserCommandes}}
     <div class="row">
         <ul class="collapsible popout l8 offset-l2" data-collapsible="accordion">
             <li>
-                <div class="collapsible-header active"><i class="material-icons">filter_drama</i>Posters</div>
-                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                <div class="collapsible-header active"><i class="material-icons">class</i>Posters</div>
+                <div class="collapsible-body"><div class="container"><h3>Vos posters</h3><p>Lorem ipsum dolor sit amet.</p></div></div>
             </li>
             <li>
-                <div class="collapsible-header"><i class="material-icons">place</i>Annales</div>
+                <div class="collapsible-header"><i class="material-icons">archive</i>Annales</div>
                 <div class="collapsible-body">
                     <div class="container">
+                        <h3>Vos annales</h3>
                         <div ng-repeat="command in annalesUserCommandes">
                             <h5>
                                 Commande du : {{command.date | date:'dd/MM/yyyy'}}
@@ -27,18 +27,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="couille in command.p">
+                                    <tr ng-repeat="co in command.p">
                                         <td>
-                                            {{couille.name}}
+                                            {{co.name}}
                                         </td>
                                         <td>
-                                            {{couille.name}}
+                                            {{co.type}}
                                         </td>
                                         <td>
-                                            {{couille.name}}
+                                            {{co.saison}}
                                         </td>
                                         <td>
-                                            {{couille.name}}
+                                            {{co.year}}
                                         </td>
 
                                     </tr>
@@ -49,20 +49,20 @@
                 </div>
             </li>
             <li>
-                <div class="collapsible-header"><i class="material-icons">whatshot</i>Locations</div>
-                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                <div class="collapsible-header"><i class="material-icons">transfer_within_a_station</i>Locations</div>
+                <div class="collapsible-body"><div class="container"><h3>Vos locations</h3><p>Lorem ipsum dolor sit amet.</p></div></div>
             </li>
             <li>
-                <div class="collapsible-header"><i class="material-icons">whatshot</i>Manuels</div>
-                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                <div class="collapsible-header"><i class="material-icons">import_contacts</i>Manuels</div>
+                <div class="collapsible-body"><div class="container"><h3>Vos manuels</h3><p>Lorem ipsum dolor sit amet.</p></div></div>
             </li>
             <li>
-                <div class="collapsible-header"><i class="material-icons">whatshot</i>Billets</div>
-                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                <div class="collapsible-header"><i class="material-icons">style</i>Billets</div>
+                <div class="collapsible-body"><div class="container"><h3>Vos billets</h3><p>Lorem ipsum dolor sit amet.</p></div></div>
             </li>
             <li>
-                <div class="collapsible-header"><i class="material-icons">whatshot</i>Plasitifications</div>
-                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+                <div class="collapsible-header"><i class="material-icons">layers</i>Plasitifications</div>
+                <div class="collapsible-body"><div class="container"><h3>Vos Plasitifications</h3><p>Lorem ipsum dolor sit amet.</p></div></div>
             </li>
         </ul>
     </div>
