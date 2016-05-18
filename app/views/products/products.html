@@ -1,87 +1,88 @@
-<div class="row" >
-    <div class="col s12">
-        <ul class="tabs" tabs>
-            <li class="tab col s3 l2"><a href="#impressionTab">Impressions</a></li>
-            <li class="tab col s3 l2"><a href="#furnitureTab">Fournitures</a></li>
-            <li class="tab col s3 l2"><a href="#ITProvisionTab">Informatique</a></li>
-        </ul>
-    </div>
-    <div id="impressionTab" class="col s12">
-        <br>
-        <div class="row" >
-            <div class="s10 offset-s1 col">
-                <div class="row">
-                    <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
-                         ng-repeat="p in products">
-                        <div id="{{p.name}}" class="card hoverable teal lighten-1 white-text" ng-if="p.category == 'impression'">
-                            <div class="card-image waves-effect waves-light">
-                                <img ng-click="user.accountType == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
-                            </div>
-                            <div class="card-content row valign-wrapper" style="height:50px">
-                                <span class="col truncate valign"><h4>{{p.name}}</h4></span>
-                            </div>
-                            <div class="card-action row valign-wrapper small" style="height:30px">
-                                <span class="col valign" ng-if="!p.onSale"><i class="material-icons" alt="non disponible a la vente">block</i><span>Non disponible</span></span>
-                                <span class="col valign" ng-if="p.onSale"><i class="material-icons" alt="en vente">work</i><span>En vente</span></span>
-                                <span class="col s4 valign price right-align"><h5>{{p.price}}€</h5></span>
-                            </div>
-                        </div><!--/card-->
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <div class="row" >
+        <div class="col s12">
+            <ul class="tabs" tabs>
+                <li class="tab col s3 l2"><a href="#impressionTab">Impressions</a></li>
+                <li class="tab col s3 l2"><a href="#furnitureTab">Fournitures</a></li>
+                <li class="tab col s3 l2"><a href="#ITProvisionTab">Informatique</a></li>
+            </ul>
         </div>
-    </div>
-    <div id="furnitureTab" class="col s12">
-        <br>
-        <div class="row" >
-            <div class="s10 offset-s1 col">
-                <div class="row">
-                    <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
-                         ng-repeat="p in products">
-                        <div class="card hoverable teal lighten-1 white-text" ng-if="p.category == 'furniture'">
-                            <div class="card-image waves-effect waves-light">
-                                <img ng-click="user.accountType == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
-                            </div>
-                            <div class="card-content row valign-wrapper" style="height:50px">
-                                <span class="col truncate valign"><h4>{{p.name}}</h4></span>
-                            </div>
-                            <div class="card-action row valign-wrapper small" style="height:30px">
-                                <span class="col valign" ng-if="!p.onSale"><i class="material-icons" alt="non disponible a la vente">block</i><span>Non disponible</span></span>
-                                <span class="col valign" ng-if="p.onSale"><i class="material-icons" alt="en vente">work</i><span>En vente</span></span>
-                                <span class="col s4 valign price right-align"><h5>{{p.price}}€</h5></span>
-                            </div>
-                        </div><!--/card-->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="ITProvisionTab" class="col s12">
-        <br>
-        <div class="row" >
-            <div class="s10 offset-s1 col">
-                <div class="row">
-                    <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
-                         ng-repeat="p in products">
-                        <div class="card hoverable teal lighten-1 white-text" ng-if="p.category == 'ITProvision'">
-                            <div class="card-image waves-effect waves-light">
-                                <img ng-click="user.accountType == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
-                            </div>
-                            <div class="card-content row valign-wrapper" style="height:50px">
-                                <span class="col truncate valign"><h4>{{p.name}}</h4></span>
-                            </div>
-                            <div class="card-action row valign-wrapper small" style="height:30px">
-                                <span class="col valign" ng-if="!p.onSale"><i class="material-icons" alt="non disponible a la vente">block</i><span>Non disponible</span></span>
-                                <span class="col valign" ng-if="p.onSale"><i class="material-icons" alt="en vente">work</i><span>En vente</span></span>
-                                <span class="col s4 valign price right-align"><h5>{{p.price}}€</h5></span>
-                            </div>
+        <div id="impressionTab" class="col s12">
+            <br>
+            <div class="row" >
+                <div class="s10 offset-s1 col">
+                    <div class="row">
+                        <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
+                             ng-repeat="p in products">
+                            <div id="{{p.name}}" class="card hoverable teal lighten-1 white-text" ng-if="p.category == 'impression'">
+                                <div class="card-image waves-effect waves-light">
+                                    <img ng-click="user.accountType == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
+                                </div>
+                                <div class="card-content row valign-wrapper" style="height:50px">
+                                    <span class="col truncate valign"><h4>{{p.name}}</h4></span>
+                                </div>
+                                <div class="card-action row valign-wrapper small" style="height:30px">
+                                    <span class="col valign" ng-if="!p.onSale"><i class="material-icons" alt="non disponible a la vente">block</i><span>Non disponible</span></span>
+                                    <span class="col valign" ng-if="p.onSale"><i class="material-icons" alt="en vente">work</i><span>En vente</span></span>
+                                    <span class="col s4 valign price right-align"><h5>{{p.price}}€</h5></span>
+                                </div>
+                            </div><!--/card-->
                         </div>
-                    </div><!--/card-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="furnitureTab" class="col s12">
+            <br>
+            <div class="row" >
+                <div class="s10 offset-s1 col">
+                    <div class="row">
+                        <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
+                             ng-repeat="p in products">
+                            <div class="card hoverable teal lighten-1 white-text" ng-if="p.category == 'furniture'">
+                                <div class="card-image waves-effect waves-light">
+                                    <img ng-click="user.accountType == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
+                                </div>
+                                <div class="card-content row valign-wrapper" style="height:50px">
+                                    <span class="col truncate valign"><h4>{{p.name}}</h4></span>
+                                </div>
+                                <div class="card-action row valign-wrapper small" style="height:30px">
+                                    <span class="col valign" ng-if="!p.onSale"><i class="material-icons" alt="non disponible a la vente">block</i><span>Non disponible</span></span>
+                                    <span class="col valign" ng-if="p.onSale"><i class="material-icons" alt="en vente">work</i><span>En vente</span></span>
+                                    <span class="col s4 valign price right-align"><h5>{{p.price}}€</h5></span>
+                                </div>
+                            </div><!--/card-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="ITProvisionTab" class="col s12">
+            <br>
+            <div class="row" >
+                <div class="s10 offset-s1 col">
+                    <div class="row">
+                        <div ng-if="products.length > 0" class="col m4 animated fadeInUp"
+                             ng-repeat="p in products">
+                            <div class="card hoverable teal lighten-1 white-text" ng-if="p.category == 'ITProvision'">
+                                <div class="card-image waves-effect waves-light">
+                                    <img ng-click="user.accountType == 'admin' && editProduct(p.name,p.price,p.onSale)" class="responsive-img" src="{{p.img}}">
+                                </div>
+                                <div class="card-content row valign-wrapper" style="height:50px">
+                                    <span class="col truncate valign"><h4>{{p.name}}</h4></span>
+                                </div>
+                                <div class="card-action row valign-wrapper small" style="height:30px">
+                                    <span class="col valign" ng-if="!p.onSale"><i class="material-icons" alt="non disponible a la vente">block</i><span>Non disponible</span></span>
+                                    <span class="col valign" ng-if="p.onSale"><i class="material-icons" alt="en vente">work</i><span>En vente</span></span>
+                                    <span class="col s4 valign price right-align"><h5>{{p.price}}€</h5></span>
+                                </div>
+                            </div>
+                        </div><!--/card-->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <div class="fixed-action-btn" ng-if="user.accountType == 'admin'" style="bottom: 45px; right: 24px;">
@@ -156,4 +157,6 @@
             <button ng-click="editProductForm.$valid && saveProduct()" class="modal-action modal-close waves-effect waves-green btn" ng-class="{disabled:editProductForm.$invalid==true}" type="submit">Valider</button>
         </div>
     </form>
+</div>
+
 </div>
