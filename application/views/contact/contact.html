@@ -1,0 +1,22 @@
+<div class="container">
+    <h3>Nous contacter</h3>
+    <br>
+    <form  id="contactForm" name="contactForm" novalidate>
+        <div class="input-field col m6 s12 l12">
+            <input id="subject" name="subject" type="text" class="validate" required ng-model="subject">
+            <label for="subject">Sujet de votre message</label>
+        </div>
+        <div class="input-field col m6 s12 l12">
+            <input id="mail" name="mail" type="email" class="validate" required ng-model="mail">
+            <label for="mail">Votre Email</label>
+        </div>
+        <div class="input-field col s12 l12">
+            <textarea id="message" class="materialize-textarea" name="text" required ng-model="text"></textarea>
+            <label for="message">Message</label>
+        </div>
+        <button class="btn waves-effect waves-light right" type="submit" name="sendMail" ng-click="contactForm.$valid && sendMail()" ng-class="{disabled:contactForm.$invalid==true}">Envoyer
+            <i class="material-icons right">send</i>
+        </button>
+    </form>
+</div>
+

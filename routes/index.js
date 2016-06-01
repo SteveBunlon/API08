@@ -24,11 +24,18 @@ var upload = multer({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render(path.join(__dirname + '/../app/index.jade'), {
+  res.render(path.join(__dirname + '/../application/index.jade'), {
       username : "test",
       toDisplay : "",
     });
 });
+router.get('*', function(req, res, next) {
+    res.render(path.join(__dirname + '/../application/index.jade'), {
+        username : "test",
+        toDisplay : "",
+    });
+});
+
 router.post('/api/products', function(req, res, next){
     product.find({}, function(err, data){
         if(err)
@@ -57,29 +64,30 @@ router.post('/api/product', function(req, res, next){
         }
     });
 })
-router.post('/api/products/new', function(req, res, next){
+router.post('/api/products/new', upload.single('file'),function(req, res, next){
+    console.log("passing");
     var productName = req.body.name || null,
         productCategory = req.body.category || null,
         productPrice = req.body.price || null,
-        productOnSale = req.body.onSale;
+        productOnSale = req.body.onSale,
+        productFile = req.file;
 
-    console.log(productName);
-    console.log(productCategory);
-    console.log(productPrice);
+    console.log(productFile);
     if(!productName || !productCategory || !productPrice){
-        res.status(401).send("Des informations obligatoires manquent");
+        res.status(400).send("Des informations obligatoires manquent");
     }
     product.findOne({name: productName }, function(err, doc){
         if(err) {
-            res.sendStatus(500);
+            res.status(500).send("Une erreur est survenue");
         } else {
             if(doc) {
-                res.sendStatus(500);
+                res.status(500).send("Le nom est déjà utilisé");
             } else {
                 var newProduct = new product({ name: productName,
                     category: productCategory,
                     price: productPrice,
-                    onSale: productOnSale
+                    onSale: productOnSale,
+                    img: productFile.path
                 });
                 newProduct.save();
                 res.sendStatus(200);
@@ -88,10 +96,6 @@ router.post('/api/products/new', function(req, res, next){
     })
 
 })
-
-
-
-
 
 router.get('/cas', function(req, res, next) {
     request("https://cas.utc.fr/cas/serviceValidate?service=http://51.255.169.85:3001/cas&ticket="+req.query.ticket, function(error, response, body){

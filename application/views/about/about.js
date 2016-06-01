@@ -13,5 +13,9 @@ angular.module('polarApplication.about', ["ui.router"])
             });
     })
 
-    .controller("aboutCtrl",["$scope","$state", function ($scope, $state){
+    .controller("aboutCtrl",["$window","$scope", function ($window,$scope){
+        $scope.goBack = function(){
+            console.log("hella high");
+            $window.history.back();
+        }
     }]);

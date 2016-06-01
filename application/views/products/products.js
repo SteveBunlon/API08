@@ -32,15 +32,29 @@ angular.module('polarApplication.products', ["ui.router"])
     };
 
     $scope.createProduct = function(){
-        if($scope.name || $scope.category || $scope.price) {
-            productService.createProduct($scope.name,$scope.category,$scope.price,$scope.onSale).then(function(){
-                console.log("crated");
+        var testValidity = true;
+        if($scope.name && $scope.price && $scope.onSale && $scope.productFile && $scope.category){
+            $scope.products.forEach(function(prod){
+                if(prod.name == $scope.name){
+                    $scope.errMessage = "Le nom de produit éxiste déjà";
+                    testValidity = false;
+                    return;
+                }
+            })
+            if(testValidity){
+                productService.createProduct($scope.category, $scope.name, $scope.price, $scope.onSale, $scope.productFile).then(function(){
+                    console.log("file transfered");
+                }, function($dataObject){
+                    alert($dataObject.data);
+                }, function ($dataObject){
+                    console.log("transfering files");
+                })
                 $state.reload();
-            },function(err){
-                console.error(err);
-            });
+            }
         }
-    };
+        else
+            false;
+    }
 
     $scope.reset = function(){
         $scope.name = '';
@@ -56,6 +70,15 @@ angular.module('polarApplication.products', ["ui.router"])
             console.error(err);
         })
     };
+
+    $scope.addFile = function($file, invalidFile, $event){
+        if($file && !invalidFile)
+            $scope.productFile = $file;
+        else{
+            $scope.productFile = "";
+            alert("Votre fichier est invalide !");
+        }
+    }
 
     $timeout(function() {
         $('.modal-trigger').leanModal({

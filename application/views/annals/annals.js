@@ -81,7 +81,7 @@ angular.module('polarApplication.annals', ["ui.router"])
 
         $scope.typeSelect = ["partiel", "median", "final"];
         $scope.saisonSelect = ["printemps", "automne"];
-        $scope.yearSelect = ["2009","2010","2012","2015"];
+        $scope.yearSelect = ["2009","2010","2012","2015","2016"];
         $scope.annalsCommand = [{name:"API08", type:"median", saison:"automne",year:"2009"}];
         var currentTime = new Date();
         $scope.currentTime = currentTime;

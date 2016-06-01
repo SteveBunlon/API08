@@ -12,18 +12,22 @@ angular.module('polarApplication.services', ["ngFileUpload"])
         }
     })
 
-    .factory('productService', ["$http", "apiUrl", function($http, apiUrl){
+    .factory('productService', ["Upload","$http", "apiUrl", function(Upload, $http, apiUrl){
         return {
             getProducts:function(){
                 return $http.post(apiUrl.getApiUrl() + "/products",{});
             },
             
-            saveProduct:function(name,price,onSale){
-                return $http.post(apiUrl.getApiUrl() + "/product",{name:name, price:price, onSale:onSale})
+            saveProduct:function(name,price,onSale,file){
+                return $http.post(apiUrl.getApiUrl() + "/product",{name:name, price:price, onSale:onSale});
             },
 
-            createProduct:function(name,category,price,onSale){
-                return $http.post(apiUrl.getApiUrl()+ "/products/new", {name:name, category:category, price:price, onSale:onSale})
+            createProduct:function(category,name,price,onSale, file){
+                return Upload.upload({
+                    url:apiUrl.getApiUrl()+"/products/new",
+                    arrayKey: '',
+                    data:{'file':file,'name':name, 'category':category,'price':price, 'onSale':onSale}
+                })
             }
         }
     }])
@@ -62,7 +66,6 @@ angular.module('polarApplication.services', ["ngFileUpload"])
                 return $http.post(apiUrl.getApiUrl() + "/annals",{});
             },
             add:function(type, name, file, saison, date, pages){
-                console.log(file);
                 return Upload.upload({
                     url:apiUrl.getApiUrl()+"/annals/add",
                     arrayKey: '',

@@ -82,7 +82,7 @@
     <nav>
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">
-                <img src="app/pictures/favicon.png" height="62"></img>
+                <img src="application/pictures/favicon.png" height="55"></img>
                 <span>Le Polar </span>
             </a>
             <a href="#" data-activates="mobile-demo" class="button-collapse" data-closeonclick="false"><i class="material-icons">menu</i></a>
@@ -107,7 +107,7 @@
                         <i class="material-icons right">arrow_drop_down</i>
                     </a>
                 </li>
-                <li class="{{(state.current.name == 'app.about')?'active':''}}" ng-click="goAbout()"><a href="#">À propos</a></li>
+                <li class="{{(state.current.name == 'app.about')?'active':''}}" ng-click="goAbout()"><a ui-sref="app.about">À propos</a></li>
                 <li><a ng-show="!connected" class='dropdown-button' data-activates='connexionDropdown' dropdown>Connexion<i class="material-icons right">arrow_drop_down</i></a></li>
                 <li><a ng-show="connected" class='dropdown-button' data-activates='decoDropdown' dropdown>
                     <i class="material-icons right">arrow_drop_down</i>
@@ -137,15 +137,15 @@
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
-                <h5 class="white-text">Bienvenue au Polar!</h5>
-                <p class="grey-text text-lighten-4">N'hésitez pas à nous contacter via le formulaire du site ou à nous rendre visite au local FE008 à la MDE!
+                <h5 class="white-text">Bienvenue au Polar !</h5>
+                <p class="grey-text text-lighten-4">N'hésitez pas à nous contacter via le formulaire du site ou à nous rendre visite au local FE008 à la MDE !
                 </p>
             </div>
             <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">Liens</h5>
                 <ul>
                     <li><a class="grey-text text-lighten-3" href="https://www.facebook.com/polar.utc.3?fref=ts" target="_blank">
-                        <img ng-src="app/pictures/FB-FindUsonFacebook-online-100.png"></a>
+                        <img ng-src="application/pictures/FB-FindUsonFacebook-online-100.png"></a>
                     </li>
                 </ul>
             </div>

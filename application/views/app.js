@@ -15,20 +15,23 @@ angular.module('polarApplication', ["polarApplication.services",
     'polarApplication.annals',
     'angucomplete'])
 
-.config(function ($stateProvider){
+.config(function ($stateProvider, $locationProvider, $urlRouterProvider){
     
     $stateProvider
     .state('app', {
-        url: "/app",
+        url: "",
         abstract:true,            
         templateUrl: "views/app.html",
         controller: "appCtrl",
         reload: "true"
     });
+
+    $locationProvider.html5Mode(true);
+    $urlRouterProvider.otherwise('app/home');
 })
 
 //.constant("API_URL", "http://51.255.169.85:3001")
-.constant("API_URL", "http://51.255.169.85:3001")
+.constant("API_URL", "http://localhost:3001")
 
 .run(function ($state, $http, loginService, AuthenticationService) {
     //we connect the user if the CAS returned us a student
