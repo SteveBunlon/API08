@@ -127,8 +127,8 @@ router.get('/cas', function(req, res, next) {
             //sending the info saying that we need to connect a CAS user
             console.log("rendering",usernameFromXml);
             res.render(path.join(__dirname + '/../application/index.jade'), {
-                username: usernameFromXml,
-                toDisplay: toDisplayFromXml}
+                usernameFromXml: usernameFromXml,
+                toDisplayFromXml: toDisplayFromXml}
             );
         });
     });
