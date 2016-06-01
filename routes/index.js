@@ -108,6 +108,7 @@ router.get('/cas', function(req, res, next) {
             var usernameFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:user"][0],
                 toDisplayFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:cn"][0],
                 mailFromXml = result["cas:serviceResponse"]["cas:authenticationSuccess"][0]["cas:attributes"][0]["cas:mail"][0];
+            console.log(usernameFromXml, toDisplayFromXml);
             //looking if the user exists
             user.find({casUsername:usernameFromXml}, function(err, data){
                 if(err)
@@ -129,7 +130,8 @@ router.get('/cas', function(req, res, next) {
                 }
             })
             //sending the info saying that we need to connect a CAS user
-            res.render(path.join(__dirname + '/../app/index.jade'), {
+            console.log("rendering");
+            res.render(path.join(__dirname + '/../application/index.jade'), {
                 usernameFromXml: usernameFromXml,
                 toDisplayFromXml: toDisplayFromXml}
             );
