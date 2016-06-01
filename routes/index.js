@@ -309,7 +309,95 @@ router.post("/api/userCommands", function(req, res, next){
     }
 })
 
-router.get('*', function(req, res, next) {
+router.get('/about', function(req, res, next) {
+    console.log("passing there");
+    res.render(path.join(__dirname + '/../application/index.jade'), {
+        username : "test",
+        toDisplay : "",
+    });
+});
+
+router.get('/annals', function(req, res, next) {
+    console.log("passing there");
+    res.render(path.join(__dirname + '/../application/index.jade'), {
+        username : "test",
+        toDisplay : "",
+    });
+});
+
+router.get('/annals/list', function(req, res, next) {
+    console.log("passing there");
+    res.render(path.join(__dirname + '/../application/index.jade'), {
+        username : "test",
+        toDisplay : "",
+    });
+});
+
+router.get('/annals/order', function(req, res, next) {
+    console.log("passing there");
+    res.render(path.join(__dirname + '/../application/index.jade'), {
+        username : "test",
+        toDisplay : "",
+    });
+});
+
+router.get('/annals/upload', function(req, res, next) {
+    console.log("passing there");
+    res.render(path.join(__dirname + '/../application/index.jade'), {
+        username : "test",
+        toDisplay : "",
+    });
+});
+
+router.get('/commands', function(req, res, next) {
+    console.log("passing there");
+    res.render(path.join(__dirname + '/../application/index.jade'), {
+        username : "test",
+        toDisplay : "",
+    });
+});
+
+router.get('/contact', function(req, res, next) {
+    console.log("passing there");
+    res.render(path.join(__dirname + '/../application/index.jade'), {
+        username : "test",
+        toDisplay : "",
+    });
+});
+
+router.get('/team', function(req, res, next) {
+    console.log("passing there");
+    res.render(path.join(__dirname + '/../application/index.jade'), {
+        username : "test",
+        toDisplay : "",
+    });
+});
+
+router.get('/home', function(req, res, next) {
+    console.log("passing there");
+    res.render(path.join(__dirname + '/../application/index.jade'), {
+        username : "test",
+        toDisplay : "",
+    });
+});
+
+router.get('/products', function(req, res, next) {
+    console.log("passing there");
+    res.render(path.join(__dirname + '/../application/index.jade'), {
+        username : "test",
+        toDisplay : "",
+    });
+});
+
+router.get('/service', function(req, res, next) {
+    console.log("passing there");
+    res.render(path.join(__dirname + '/../application/index.jade'), {
+        username : "test",
+        toDisplay : "",
+    });
+});
+
+router.get('/users', function(req, res, next) {
     console.log("passing there");
     res.render(path.join(__dirname + '/../application/index.jade'), {
         username : "test",
