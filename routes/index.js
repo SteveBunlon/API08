@@ -29,12 +29,7 @@ router.get('/', function(req, res, next) {
       toDisplay : "",
     });
 });
-router.get('*', function(req, res, next) {
-    res.render(path.join(__dirname + '/../application/index.jade'), {
-        username : "test",
-        toDisplay : "",
-    });
-});
+
 
 router.post('/api/products', function(req, res, next){
     product.find({}, function(err, data){
@@ -313,5 +308,13 @@ router.post("/api/userCommands", function(req, res, next){
         })
     }
 })
+
+router.get('*', function(req, res, next) {
+    console.log("passing there");
+    res.render(path.join(__dirname + '/../application/index.jade'), {
+        username : "test",
+        toDisplay : "",
+    });
+});
 
 module.exports = router;
