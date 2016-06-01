@@ -93,7 +93,6 @@ router.post('/api/products/new', upload.single('file'),function(req, res, next){
 })
 
 router.get('/cas', function(req, res, next) {
-    console.log("WAAAAAAAAAAAAAAAAAAAAAAAAAAARNIIIIIIIIIIIIIIIIIIIIIIN");
     request("https://cas.utc.fr/cas/serviceValidate?service=http://51.255.169.85:3001/cas&ticket="+req.query.ticket, function(error, response, body){
         if(error)
             res.status(500).send("Request to UTC pb");
@@ -126,7 +125,7 @@ router.get('/cas', function(req, res, next) {
                 }
             })
             //sending the info saying that we need to connect a CAS user
-            console.log("rendering");
+            console.log("rendering",usernameFromXml);
             res.render(path.join(__dirname + '/../application/index.jade'), {
                 username: usernameFromXml,
                 toDisplay: toDisplayFromXml}
